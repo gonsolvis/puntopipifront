@@ -1,5 +1,6 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import AddToilet from "../AddToilet/AddToilet";
 // import { useContext } from "react";
 // import { AuthContext } from "../../context/auth.context";
 
@@ -26,9 +27,8 @@ function Navbar() {
                 <Link to="/toilets" className="nav-link">Toilets </Link>
               </li>
               <li className="nav-item">
-                <Link to="/toilets/new" className="nav-link">New Toilet </Link>
+                <AddToilet className="nav-link"/>
               </li>
-              
              <li className="nav-item">
                 <Link to="/signup" className="nav-link">Sign Up </Link>
               </li>
