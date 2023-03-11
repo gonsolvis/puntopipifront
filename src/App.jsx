@@ -12,11 +12,12 @@ import Navbar from "./components/Navbar/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
 import Footer from "./components/Navbar/Footer";
+import AddToilet from "./components/AddToilet/AddToilet";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      {/* <Navbar /> */}
 
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -34,6 +35,10 @@ function App() {
           <IsAnon>
             <LoginPage />
           </IsAnon>} />
+
+          <Route path="/new" element={<IsAnon>
+          <AddToilet />
+        </IsAnon>} />
 
         <Route path="/about" element={
           <IsAnon>
