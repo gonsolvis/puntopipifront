@@ -2,6 +2,7 @@ import "./HomePage.css";
 import { useEffect, useState } from "react";
 import toiletsService from "../../services/toilets.service"
 import { Link } from "react-router-dom";
+import AddToilet from "../../components/AddToilet/AddToilet";
 
 function HomePage() {
   const [toilets, setToilets] = useState([])
@@ -23,7 +24,7 @@ function HomePage() {
     let solidStr = <i className="fa-solid fa-star"></i>
     let emptyStr = <i className="fa-sharp fa-regular fa-star"></i>
 
-    
+
     // let solidStr = <i className="fa-solid fa-toilet-paper"></i>
     // let emptyStr = <i className="fa-sharp fa-regular fa-star"></i>
     let stars = Math.round(rating)
@@ -45,19 +46,33 @@ function HomePage() {
 
   return (
     <>
-      <br/>
-      <h1> All toilets page </h1>
+      <br />
+      <h1> All Toilets </h1>
+      <br />
+      <h2> Add Toilets </h2>
+
+      <AddToilet />
+
+
+
       <div className="d-flex flex-row flex-wrap justify-content-center">
         {toilets.map(toilet => {
           return (
             <div className="card m-4 w-25 " key={toilet._id}>
               <i className="fa-solid fa-toilet fa-1x"></i>
               <div className="card-body">
+                <p className="card-text">{toilet._id}</p>
                 <p className="card-text">{toilet.title}</p>
                 <p className="card-text">{toilet.description}</p>
                 <p className="card-text">{getStars(toilet.rating)}</p>
                 <p className="card-text">{toilet.imageUrl}</p>
-                <p className="card-text">{toilet.createdAt}</p>
+                <p className="card-text">
+                  {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
+                  {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+
+
+
+                </p>
                 <Link to={`/toilets/${toilet._id}`} className="btn btn-primary">View details</Link>
               </div>
             </div>
