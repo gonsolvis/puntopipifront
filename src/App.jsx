@@ -13,14 +13,28 @@ import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
 import Footer from "./components/Navbar/Footer";
 import AddToilet from "./components/AddToilet/AddToilet";
+import IndividualToilet from "./pages/IndividualToilet";
+import CommentTable from "./components/comments/CommentTable";
 
 function App() {
   return (
     <div className="App">
-      {/* <Navbar /> */}
+      <Navbar />
 
       <Routes>
+      {/* This is the homepage full of maps */}
         <Route path="/" element={<HomePage />} />
+
+        <Route path="/toilets/:toiletId`" element={
+          <IsAnon>
+            <IndividualToilet />
+          </IsAnon>} />
+
+          <Route path="/comment" element={
+          <IsAnon>
+            <CommentTable />
+          </IsAnon>} />
+
 
         <Route path="/profile" element={
           <IsPrivate>
