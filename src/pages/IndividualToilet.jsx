@@ -2,18 +2,21 @@ import { useEffect, useState } from "react";
 import toiletsService from "../services/toilets.service";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import CommentTable from "../components/comments/CommentTable";
+import CommentRow from "../components/comments/CommentRow"
 
 
 let toiletPaperIcon = <i className="fa-solid fa-toilet fa-1x"></i>
 
 function IndividualToilet() {
-    let { toiletId } = useParams();
+    let { idToilet } = useParams();
+    console.log("PARAMS details", idToilet)
 
-  const [toiletsIdState, setToiletId] = useState({})
+  const [toilet, setToiletId] = useState({})
  
 
   useEffect(() => {
-    toiletsService.getOne(toiletId)
+    toiletsService.getOne(idToilet)
       .then((data) => {
         setToiletId(data.data)
      })
@@ -21,28 +24,26 @@ function IndividualToilet() {
         console.log(err)})
 
   },[]);
-  console.log(toiletId)
+  console.log("toilet details", idToilet)
+
   return (
     <>
-    <br/>
-    <h1> TESTING PAGE</h1>
+        <h1 className="h1"> IndividualToilet</h1>
 
-    {/* <AddToilet /> */}
     <div className="d-flex flex-row flex-wrap justify-content-center">        
-      <div className="card m-4 w-25 ">
+      <div className="card m-4 w-25 " key={toilet._id}>
       {toiletPaperIcon}
           <div className="card-body">
-          <p className="card-text">{toiletsIdState.title}</p>
-            <p className="card-text">{toiletsIdState.description}</p>
-            <p className="card-text">{toiletsIdState.rating}</p>
-            <p className="card-text">{toiletsIdState.imageUrl}</p>
-                 <Link to={`/toilets/}`} className="btn btn-primary"> Go back to other Toilets</Link>
+          <p className="card-text">{toilet.title}</p>
+            <p className="card-text">{toilet.description}</p>
+            <p className="card-text">{toilet.rating}</p>
+            <p className="card-text">{toilet.imageUrl}</p>
+                 <Link to={`/`} className="btn btn-primary"> Go back to other Toilets</Link>
           </div>
        </div> 
 </div>
-
-    
-
+<CommentRow/>
+<CommentTable/>
     </>
   
   );

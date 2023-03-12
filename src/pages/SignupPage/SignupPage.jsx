@@ -7,6 +7,7 @@ function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [imgUrl, SetImgUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function SignupPage() {
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleName = (e) => setName(e.target.value);
+  const handleImg = (e) => SetImgUrl(e.target.value);
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
@@ -64,6 +66,15 @@ function SignupPage() {
         <label>Name:</label>
         <input type="text" name="name" value={name} onChange={handleName} />
 
+
+        <label>imageUrl:</label>
+        <input
+          type="text"
+          name="imageUrl"
+          value={imgUrl}
+          onChange={handleImg}
+        />
+      
         <button type="submit">Sign Up</button>
       </form>
 

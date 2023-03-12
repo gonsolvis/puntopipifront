@@ -24,42 +24,16 @@ function CommentTable() {
     console.log(comments)
 
 
-// ADDING A COMMENT BOX
-   const [content, setContent] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        commentService.createOneComment({content, imageUrl})
-        .then(response => {
-            setContent("");
-            setImageUrl("");
-         
-        })
-        .catch(err => console.log(err))
-    }
 
 
 return (
     <div className="d-flex flex-column align-items-center " >
         <h1> All Comments </h1>
 
-        <form onSubmit={submitHandler} className="w-50 mx-auto mb-5">
-    <div className="mb-3">
-        <label htmlFor="title" className="form-label">Title</label>
-        <input type="text" className="form-control" id="title" aria-describedby="title" value={content} onChange={(e)=>setContent(e.target.value)} />
-    </div>
-    <div className="mb-3">
-        <label htmlFor="description" className="form-label">imageUrl</label>
-        <input type="text" className="form-control" id="imageUrl" value={imageUrl} onChange={(e)=>setImageUrl(e.target.value)}/>
-    </div>
-    <button type="submit" className="btn btn-primary">Create Comment</button>
-</form>
-
             {comments.map(comment => {
                 return (
 
-                    <div className="card p-3 w-75 m-2">
+                    <div className="card p-3 w-75 m-2" key={comment._id}>
                         <div className="d-flex justify-content-between align-items-center">
                             <div className="user d-flex flex-row align-items-center">
                                 <img

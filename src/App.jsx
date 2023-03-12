@@ -24,16 +24,10 @@ function App() {
       <Routes>
       {/* This is the homepage full of maps */}
         <Route path="/" element={<HomePage />} />
+      
+        <Route path="/toilets/:idToilet" element={<IndividualToilet />} />
 
-        <Route path="/toilets/:toiletId`" element={
-          <IsAnon>
-            <IndividualToilet />
-          </IsAnon>} />
-
-          <Route path="/comment" element={
-          <IsAnon>
-            <CommentTable />
-          </IsAnon>} />
+          <Route path="/comment" element={<CommentTable />} />
 
 
         <Route path="/profile" element={
@@ -50,21 +44,12 @@ function App() {
             <LoginPage />
           </IsAnon>} />
 
-          <Route path="/new" element={<IsAnon>
-          <AddToilet />
-        </IsAnon>} />
+   
+        <Route path="/toilets/new" element={<AddToilet/>} />
 
-        <Route path="/about" element={
-          <IsAnon>
-            <About />
-          </IsAnon>} />
-
+        <Route path="/about" element={<About />} />
           
-
-        <Route path="*" element={
-          <IsAnon>
-            <NotFoundPage />
-          </IsAnon>} />
+        <Route path="*" element={<NotFoundPage />} />
 
       </Routes>
       <Footer /> 
