@@ -40,7 +40,7 @@ class ToiletsService {
   }
 
   // DELETE /api/examples/:id
-  deleteProject = async (id) => {
+  deleteToilet = async (id) => {
     return this.api.delete(`/toilets/delete/${id}`);
   } 
 
