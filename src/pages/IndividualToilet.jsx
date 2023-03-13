@@ -1,26 +1,43 @@
-import "./HomePage.css";
-import { useEffect, useState, useContext } from "react";
-import toiletsService from "../../services/toilets.service"
+import { useEffect, useState } from "react";
+import toiletsService from "../services/toilets.service";
 import { Link } from "react-router-dom";
-import AddToilet from "../../components/AddToilet/AddToilet";
-import { AuthContext } from "../../context/auth.context";
+import { useParams } from "react-router-dom";
+import CommentTable from "../components/comments/CommentTable";
+import AddComment from "../components/comments/AddComment"
+import { useNavigate } from "react-router-dom";
 
-function HomePage() {
-  const [toilets, setToilets] = useState([])
-  const {isLoggedIn } = useContext(AuthContext);
+
+let toiletPaperIcon = <i className="fa-solid fa-toilet fa-1x"></i>
+
+function IndividualToilet() {
+    let { idToilet } = useParams();
+    console.log("PARAMS details", idToilet)
+
+  const [toilet, setToiletId] = useState({})
+ 
+const navigate = useNavigate();
 
   useEffect(() => {
-    toiletsService.getAll()
+    toiletsService.getOne(idToilet)
       .then((data) => {
-       setToilets(data.data)
-       console.log(data) 
-      })
+        setToiletId(data.data)
+     })
       .catch((err) => {
+        console.log(err)})
 
-        console.log(err)
-      })
+  },[]);
+  console.log("toilet details", idToilet)
 
-  }, [])
+  //   // DELETE COMMENT
+const deleteHandler = (idToilet) => {
+    toiletsService.deleteToilet(idToilet)
+    .then(response => {
+      console.log(response);
+      navigate("/");
+    })
+}
+
+
 
   const getStars = (rating) => {
     let solidStr = <i className="fa-solid fa-star"></i>
@@ -45,33 +62,16 @@ function HomePage() {
       return <>{solidStr}{solidStr}{solidStr}{solidStr}{solidStr}</>
     }
   }
+
   return (
     <>
-      <br />
-      <h1> All Toilets </h1>
-      <br />
-  
+        <h1 className="h1"> Toilet</h1>
 
-      {isLoggedIn ? (
-  <div>
-    <h2> Add Toilets </h2>
-    <AddToilet />
-  </div>
-) : (
-  <Link to={`/login`} className="btn btn-primary">
-    Log in to add a toilet
-  </Link>
-)}
-
-
-
-      <div className="d-flex flex-row flex-wrap justify-content-center">
-        {toilets.map(toilet => {
-          return (
-            <div className="card m-4 p-2" key={toilet._id}>
-              <i className="fa-solid fa-toilet fa-1x"></i>
-              <div className="card-body">
-                <p className="card-text">{toilet._id}</p>
+    <div className="d-flex flex-row flex-wrap justify-content-center">        
+      <div className="card m-4">
+      {toiletPaperIcon}
+          <div className="card-body">
+          <p className="card-text">{toilet._id}</p>
                 <p className="card-text">{toilet.title}</p>
                 <p className="card-text">{toilet.description}</p>
                 <p className="card-text">{getStars(toilet.rating)}</p>
@@ -80,14 +80,17 @@ function HomePage() {
                   {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
                   {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                </p>
-                <Link to={`/toilets/${toilet._id}`} className="btn btn-primary">View details</Link>
-              </div>
-            </div>
-          )
-        })}
-      </div>
+                 <Link to={`/`} className="btn btn-primary"> Go back to other Toilets</Link>
+              <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>
+                   
+          </div>
+       </div> 
+</div>
+<AddComment toiletId={idToilet}/>
+<CommentTable toiletId={idToilet}/>
     </>
+  
   );
 }
 
-export default HomePage;
+export default IndividualToilet;
