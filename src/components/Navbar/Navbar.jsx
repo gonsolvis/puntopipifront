@@ -1,13 +1,15 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import AddToilet from "../AddToilet/AddToilet";
-import { useContext } from "react";
+import { useContext, useState, } from "react";
 import { AuthContext } from "../../context/auth.context";
 
 function Navbar() {
   // Subscribe to the AuthContext to gain access to
   // the values from AuthContext.Provider's `value` prop
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  // console.log(user)
+  const [ProfileId, setProfileID] = useState(user?._id || '');
 
   return (
     <>
@@ -29,18 +31,23 @@ function Navbar() {
               {isLoggedIn ? (
                 <>
                   <li className="nav-item">
-                    <Link to="/profile" className="nav-link">My Profile </Link>
-                  </li>
+                    {/* <Link to="/profile" className="nav-link">My Profile </Link> */}
+                    <Link to={`/profile/${ProfileId}`} className="nav-link">My Profile </Link>
+                 </li>
                   <li className="nav-item">
                     <button  id="buttonNav" className="nav-link" onClick={logOutUser}>Logout</button>
                   </li>
                 </>
               ) : (
                 <>
+                <li className="nav-item">
+                    <Link to="/login" className="nav-link">Log In </Link>
+                  </li>
                   <li className="nav-item">
                     <Link to="/signup" className="nav-link">Sign Up </Link>
                   </li>
-                </>
+                 
+              </>
               )}
 
               <li className="nav-item">

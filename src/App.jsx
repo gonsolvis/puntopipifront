@@ -30,10 +30,7 @@ function App() {
           <Route path="/comment" element={<CommentTable />} />
 
 
-        <Route path="/profile" element={
-          <IsPrivate>
-            <ProfilePage />
-          </IsPrivate>} />
+        <Route path="/profile/:idProfile" element={<ProfilePage />} />
 
         <Route path="/signup" element={<IsAnon>
           <SignupPage />

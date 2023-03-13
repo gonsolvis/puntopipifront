@@ -1,17 +1,19 @@
 import "./HomePage.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import toiletsService from "../../services/toilets.service"
 import { Link } from "react-router-dom";
 import AddToilet from "../../components/AddToilet/AddToilet";
+import { AuthContext } from "../../context/auth.context";
 
 function HomePage() {
   const [toilets, setToilets] = useState([])
+  const {isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     toiletsService.getAll()
       .then((data) => {
-        setToilets(data.data)
-
+       setToilets(data.data)
+       console.log(data) 
       })
       .catch((err) => {
 
@@ -43,22 +45,30 @@ function HomePage() {
       return <>{solidStr}{solidStr}{solidStr}{solidStr}{solidStr}</>
     }
   }
-
   return (
     <>
       <br />
       <h1> All Toilets </h1>
       <br />
-      <h2> Add Toilets </h2>
+  
 
-      <AddToilet />
+      {isLoggedIn ? (
+  <div>
+    <h2> Add Toilets </h2>
+    <AddToilet />
+  </div>
+) : (
+  <Link to={`/login`} className="btn btn-primary">
+    Log in to add a toilet
+  </Link>
+)}
 
 
 
       <div className="d-flex flex-row flex-wrap justify-content-center">
         {toilets.map(toilet => {
           return (
-            <div className="card m-4 w-25 " key={toilet._id}>
+            <div className="card m-4 p-2" key={toilet._id}>
               <i className="fa-solid fa-toilet fa-1x"></i>
               <div className="card-body">
                 <p className="card-text">{toilet._id}</p>
@@ -69,10 +79,7 @@ function HomePage() {
                 <p className="card-text">
                   {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
                   {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
-
-
-
-                </p>
+               </p>
                 <Link to={`/toilets/${toilet._id}`} className="btn btn-primary">View details</Link>
               </div>
             </div>

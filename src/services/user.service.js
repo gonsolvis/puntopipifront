@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-class CommentService {
+class UserService {
   constructor() {
     this.api = axios.create({
       baseURL: process.env.REACT_APP_SERVER_URL || "http://localhost:5005"
@@ -20,34 +20,34 @@ class CommentService {
   }
 
   // POST /api/examples
-  createOneComment = async (requestBody) => {
-    return this.api.post('/comment/new', requestBody);
-  }
+//   createOne = async (requestBody) => {
+//     return this.api.post('/examples', requestBody);
+//   }
 
   // GET /api/examples
-  getAllComments = async (id) => {
-    return this.api.get(`/comment/${id}`);
+//   getAll = async () => {
+//     return this.api.get('/api/examples');
+//   }
+
+  // GET /api/examples/:id
+  getOneProfile = async (id) => {
+    return this.api.get(`/user/profile/${id}`);
   }
 
-//   // GET /api/examples/:id
-//   getOneComment = async (id) => {
-//     return this.api.get(`/api/examples/${id}`);
-//   }
-
 //   // PUT /api/examples/:id
-//   updateOneComment = async (id, requestBody) => {
-//     return this.api.put(`/api/examples/${id}`, requestBody);
+//   updateOne = async (id, requestBody) => {
+//     return this.api.put(`/profile/${id}`, requestBody);
 //   }
 
-  // DELETE /api/examples/:id
-  deleteComment = async (id) => {
-    return this.api.delete(`/comment/delete/${id}`);
-  } 
+//   // DELETE /api/examples/:id
+//   deleteProject = async (id) => {
+//     return this.api.delete(`/profile/${id}`);
+//   } 
 
 
 }
 
 // Create one instance of the service
-const commentService = new CommentService();
+const userService = new UserService();
 
-export default commentService;
+export default userService;
