@@ -12,12 +12,13 @@ function HomePage() {
   useEffect(() => {
     toiletsService.getAll()
       .then((data) => {
+        console.log("test")
        setToilets(data.data)
-       console.log(data) 
+       console.log(data.data) 
       })
       .catch((err) => {
 
-        console.log(err)
+        console.log("error" , err)
       })
 
   }, [])
