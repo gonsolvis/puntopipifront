@@ -1,13 +1,13 @@
-import axios from "axios";
-import React, { useState } from 'react';
-
+// // import "./LoginPage.css";
+import { useState } from "react";
+import toiletsService from "../../services/toilets.service";
 
 function AddToilet() {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [rating, setRating] = useState("");
-    const [image, setImage] = useState("");
+    const [imageUrl, setImageUrl] = useState("");
 
 
     const [isOpen, setIsOpen] = useState(false);
@@ -16,16 +16,18 @@ function AddToilet() {
         setIsOpen(!isOpen);
     };
 
-    const submitHandler = (e) => {
-        e.preventDefault();
-        axios.put(process.env.REACT_APP_API_URL+"/toilets/edit/"+toiletId, {title, description, rating, image})
-        .then(response => {
-            //////
-        })
-        .catch(err=>console.log(err))
-    }
+const submitHandler = (e) => {
+    e.preventDefault();
+    toiletsService.createOne({title, description, rating, imageUrl})
+    .then(response => {
+         setTitle("");
+        setDescription("");
+        setRating("");
+        setImageUrl("");
+    })
+    .catch(err => console.log(err))
+}
 
-    };
 
     return (
         <div className="dropdown-form">
@@ -48,6 +50,6 @@ function AddToilet() {
                 </div>
             )}
         </div>
-    );
+    )
 
-// export default AddToilet;
+export default AddToilet;

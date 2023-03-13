@@ -12,6 +12,9 @@ import Navbar from "./components/Navbar/Navbar";
 import IsPrivate from "./components/IsPrivate/IsPrivate";
 import IsAnon from "./components/IsAnon/IsAnon";
 import Footer from "./components/Navbar/Footer";
+import AddToilet from "./components/AddToilet/AddToilet";
+import IndividualToilet from "./pages/IndividualToilet";
+import CommentTable from "./components/comments/CommentTable";
 
 function App() {
   return (
@@ -19,12 +22,15 @@ function App() {
       <Navbar />
 
       <Routes>
+      {/* This is the homepage full of maps */}
         <Route path="/" element={<HomePage />} />
+      
+        <Route path="/toilets/:idToilet" element={<IndividualToilet />} />
 
-        <Route path="/profile" element={
-          <IsPrivate>
-            <ProfilePage />
-          </IsPrivate>} />
+          <Route path="/comment" element={<CommentTable />} />
+
+
+        <Route path="/profile/:idProfile" element={<ProfilePage />} />
 
         <Route path="/signup" element={<IsAnon>
           <SignupPage />
@@ -35,17 +41,12 @@ function App() {
             <LoginPage />
           </IsAnon>} />
 
-        <Route path="/about" element={
-          <IsAnon>
-            <About />
-          </IsAnon>} />
+   
+        <Route path="/toilets/new" element={<AddToilet/>} />
 
+        <Route path="/about" element={<About />} />
           
-
-        <Route path="*" element={
-          <IsAnon>
-            <NotFoundPage />
-          </IsAnon>} />
+        <Route path="*" element={<NotFoundPage />} />
 
       </Routes>
       <Footer /> 
