@@ -69,13 +69,12 @@ function HomePage() {
         {toilets.map(toilet => {
           return (
             <div className="card m-4 p-2" key={toilet._id}>
-              <i className="fa-solid fa-toilet fa-1x"></i>
-              <div className="card-body">
+                <div className="card-body">
                 <p className="card-text">{toilet._id}</p>
                 <p className="card-text">{toilet.title}</p>
                 <p className="card-text">{toilet.description}</p>
                 <p className="card-text">{getStars(toilet.rating)}</p>
-                <p className="card-text">{toilet.imageUrl}</p>
+                <img  src={toilet.imageUrl} alt="not working" className="card-text"/> 
                 <p className="card-text">
                   {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
                   {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}

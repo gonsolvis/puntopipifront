@@ -34,6 +34,9 @@ class UserService {
     return this.api.get(`/user/profile/${id}`);
   }
 
+
+  
+
 //   // PUT /api/examples/:id
 //   updateOne = async (id, requestBody) => {
 //     return this.api.put(`/profile/${id}`, requestBody);
