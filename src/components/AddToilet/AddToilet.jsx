@@ -51,5 +51,6 @@ const submitHandler = (e) => {
             )}
         </div>
     )
+            };
 
 export default AddToilet;
