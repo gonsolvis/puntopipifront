@@ -9,8 +9,9 @@ function Navbar() {
   // the values from AuthContext.Provider's `value` prop
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   // console.log(user)
-  const [ProfileId, setProfileID] = useState(user?._id || '');
+  const [ProfileId, setProfileID] = useState("");
 
+  // user?._id || ''
   return (
     <>
 
@@ -32,7 +33,7 @@ function Navbar() {
                 <>
                   <li className="nav-item">
                     {/* <Link to="/profile" className="nav-link">My Profile </Link> */}
-                    <Link to={`/profile/${ProfileId}`} className="nav-link">My Profile </Link>
+                    <Link to={`/profile/${user?._id}`} className="nav-link">My Profile </Link>
                  </li>
                   <li className="nav-item">
                     <button  id="buttonNav" className="nav-link" onClick={logOutUser}>Logout</button>

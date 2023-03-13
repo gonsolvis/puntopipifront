@@ -36,6 +36,13 @@ class AuthService {
     // same as
     // return axios.post("http://localhost:5005/auth/verify");
   };
+
+
+  // uploadImage = async (file) => {
+  //   return this.api.post("/auth/upload", file)
+  // }
+
+
 }
 
 // Create one instance (object) of the service

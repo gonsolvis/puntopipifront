@@ -24,6 +24,12 @@ class ToiletsService {
     return this.api.post('/toilets/new', requestBody);
   }
 
+
+
+  uploadImage = async (file) => {
+    return this.api.post("/toilets/upload", file)
+  }
+  
   // GET /api/examples
   getAll = async () => {
     return this.api.get('/toilets');

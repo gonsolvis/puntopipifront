@@ -1,6 +1,8 @@
 // // import "./LoginPage.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import toiletsService from "../../services/toilets.service";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth.context";
 
 function AddToilet() {
 
@@ -10,20 +12,41 @@ function AddToilet() {
     const [imageUrl, setImageUrl] = useState("");
 
 
-//     const [isOpen, setIsOpen] = useState(false);
+    const { user } = useContext(AuthContext);
 
-//     const dropdownClickHandler = () => {
-//         setIsOpen(!isOpen);
-//     };
+ const navigate = useNavigate();
+
+  // ******** this method handles the file upload ********
+  const handleFileUpload = (e) => {
+    // console.log("The file to be uploaded is: ", e.target.files[0]);
+ 
+    const uploadData = new FormData();
+ 
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadData.append("imageUrl", e.target.files[0]);
+ 
+    toiletsService
+      .uploadImage(uploadData)
+      .then(response => {
+        // console.log("response is: ", response);
+        // response carries "fileUrl" which we can use to update the state
+        setImageUrl(response.fileUrl);
+      })
+      .catch(err => console.log("Error while uploading the file: ", err));
+  };
+
+
 
 const submitHandler = (e) => {
     e.preventDefault();
-    toiletsService.createOne({title, description, rating, imageUrl})
+    toiletsService.createOne({title, description, rating, imageUrl, creator: user._id})
     .then(response => {
          setTitle("");
         setDescription("");
         setRating("");
         setImageUrl("");
+        navigate("/");
     })
     .catch(err => console.log(err))
 }
@@ -44,7 +67,7 @@ return (<div>
         </div>
         <div className="mb-3">
             <label htmlFor="description" className="form-label">imageUrl</label>
-            <input type="text" className="form-control" id="imageUrl" value={imageUrl} onChange={(e)=>setImageUrl(e.target.value)}/>
+            <input type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl"/>
         </div>
         <button type="submit" className="btn btn-primary">Create project</button>
     </form>
