@@ -61,7 +61,7 @@ function EditProfilePage() {
             <label htmlFor="description" className="form-label">Upload an Image:</label>
             <input type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl"/>
         </div> */}
-        <button type="submit" className="btn btn-primary">Edit profile</button>
+        <button type="submit" className="btn btn-primary"> Submit</button>
     </form>
 
 

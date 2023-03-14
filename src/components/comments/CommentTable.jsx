@@ -8,16 +8,17 @@ import AddComment from "../comments/AddComment"
 
 
 function CommentTable({ toiletComments }) {
-    const [comments, setComments] = useState(toiletComments)
+  const [comments, setComments] = useState(toiletComments)
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const createComment = (comment) => {
-      setComments([...comments, comment])
-    }
+  const createComment = (comment) => {
+    setComments([...comments, comment])
+  }
 
-// DELETE COMMENT
-const deleteHandler = (commentId) => {
+
+  // DELETE COMMENT
+  const deleteHandler = (commentId) => {
     commentService.deleteComment(commentId)
       .then(response => {
         console.log(response);
@@ -30,15 +31,15 @@ const deleteHandler = (commentId) => {
     <div className="d-flex flex-column align-items-center " >
       <h2> Comments </h2>
 
-      <AddComment createComment={createComment}  />
-  
+      <AddComment createComment={createComment} />
+
       {comments.length === 0 ?
-        <p>There are still no comments, be the first to add one! 
- <i className="fa-regular fa-face-sad-cry fa-2x m-3"></i></p>
+        <p>There are still no comments, be the first to add one!
+          <i className="fa-regular fa-face-sad-cry fa-2x m-3"></i></p>
         :
         comments.map(comment => {
           return (
-  
+
             <div className="card p-3 w-75 m-2" key={comment._id}>
               <div className="d-flex justify-content-between align-items-center">
                 <div className="user d-flex flex-row align-items-center">
@@ -53,11 +54,12 @@ const deleteHandler = (commentId) => {
                   </span>
 
                   <div>
-               
-                <img src={comment.imageUrl} alt="movie" width="20" />
-               
-              </div>
-                  
+                    <br />
+
+                    <img src={comment.imageUrl} alt="Comment Image" className="user-img rounded-circle w-25 mr-2" />
+
+                  </div>
+
                 </div>
                 <small>
                   {new Date(comment.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}

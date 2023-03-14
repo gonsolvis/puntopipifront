@@ -17,7 +17,7 @@ function Navbar() {
 
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-          <Link to="/" className="m-2 navbar-brand ml-100 text-center"> <h1 id="navTitle">  .PuntoPipí</h1></Link>
+          <Link to="/" className="m-2 navbar-brand text-center"> <h1 className="px-4" id="navTitle">  .PuntoPipí</h1></Link>
           <button className="navbar-toggler mr-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -35,8 +35,8 @@ function Navbar() {
                     {/* <Link to="/profile" className="nav-link">My Profile </Link> */}
                     <Link to={`/profile/${user?._id}`} className="nav-link">My Profile </Link>
                  </li>
-                  <li className="nav-item">
-                    <button  id="buttonNav" className="nav-link" onClick={logOutUser}>Logout</button>
+                 <li className="nav-item">
+                    <Link to="/login" className="nav-link" onClick={logOutUser}>Logout</Link>
                   </li>
                 </>
               ) : (

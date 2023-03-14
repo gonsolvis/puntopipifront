@@ -61,11 +61,11 @@ function AddToilet({ createToilet }) {
             </div>
             <div className="mb-3">
                 <label htmlFor="description" className="form-label">rating</label>
-                <input type="text" className="form-control" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
+                <input type="text" className="form-control" id="rating" placeholder="1-5" value={rating} onChange={(e) => setRating(e.target.value)} />
             </div>
             <div className="mb-3">
-                <label htmlFor="picture" className="form-label">Upload an Image:</label>
-                <input id="picture" type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl" />
+                <label htmlFor="picture" className="form-label ">Upload an Image:</label>
+                <input id="picture" type="file" className="form-label" onChange={(e) => handleFileUpload(e)} name="imageUrl" />
             </div>
             <button type="submit" className="btn btn-primary">Create project</button>
         </form>

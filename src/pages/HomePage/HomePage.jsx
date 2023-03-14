@@ -4,6 +4,7 @@ import toiletsService from "../../services/toilets.service"
 import { Link } from "react-router-dom";
 import AddToilet from "../../components/AddToilet/AddToilet";
 import { AuthContext } from "../../context/auth.context";
+// import Index from "../maps/Index"
 
 function HomePage() {
   const [toilets, setToilets] = useState([])
@@ -47,12 +48,12 @@ function HomePage() {
   }
   return (
     <>
-
-      <h1> All Toilets </h1>
+{/* 
+ <Index /> */}
       
       {isLoggedIn ? (
   <div>
-    <h2> Add Toilets </h2>
+    <h1> Add Toilets </h1>
     <AddToilet createToilet={createToilet}/>
   </div>
 ) : (
@@ -61,7 +62,7 @@ function HomePage() {
   </Link>
 )}
 
-
+<h1> All Toilets </h1>
 
       <div className="d-flex flex-row flex-wrap justify-content-center">
         {toilets.map(toilet => {
