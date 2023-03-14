@@ -25,7 +25,6 @@ class ToiletsService {
   }
 
 
-
   uploadImage = async (file) => {
     return this.api.post("/toilets/upload", file)
   }

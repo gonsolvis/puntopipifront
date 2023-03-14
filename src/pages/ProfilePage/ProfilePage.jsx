@@ -1,10 +1,8 @@
-import "./ProfilePage.css";
 import { useContext, useEffect } from "react";
-// import { useState } from "react"
-// import { useParams } from "react-router";
-// import { userContext } from "../../context/user.context";
 import { AuthContext } from "../../context/auth.context"
 import { Link } from "react-router-dom";
+import MyToilets from "./MyToilets";
+import EditProfilePage from "./EditProfilePage";
 
 
 function ProfilePage() {
@@ -39,8 +37,14 @@ function ProfilePage() {
               {" "}
               Go back to Home Page
             </Link>
+
           </div>
         </div>
+      </div>
+
+      <div>
+      <EditProfilePage />     
+      <MyToilets /> 
       </div>
     </>
   );

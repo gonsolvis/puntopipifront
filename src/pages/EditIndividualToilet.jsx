@@ -1,22 +1,22 @@
-// // import "./LoginPage.css";
-import { useState, useContext } from "react";
-import toiletsService from "../../services/toilets.service";
-import uploadService from "../../services/upload.service"
+import { useEffect, useState, useContext } from "react";
+import toiletsService from "../services/toilets.service";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/auth.context";
-
-function AddToilet({createToilet}) {
-
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [rating, setRating] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
+import { AuthContext } from "../context/auth.context";
 
 
-    const { user } = useContext(AuthContext);
+function EditIndividualToilet({idToilet}) {
+  const { user } = useContext(AuthContext);
 
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [rating, setRating] = useState(0);
+
+
+  
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -26,10 +26,8 @@ function AddToilet({createToilet}) {
     // imageUrl => this name has to be the same as in the model since we pass
     // req.body to .create() method when creating a new movie in '/api/movies' POST route
     uploadData.append("imageUrl", e.target.files[0]);
-   
-    console.log("IMAGE URL", imageUrl)
- 
-    uploadService
+       console.log(imageUrl)
+     toiletsService
       .uploadImage(uploadData)
       .then(response => {
         // console.log("response is: ", response);
@@ -39,23 +37,25 @@ function AddToilet({createToilet}) {
       .catch(err => console.log("Error while uploading the file: ", err));
   };
 
-
-
-const submitHandler = (e) => {
+  //   // edit toilet
+  const editHandler = (e) => {
     e.preventDefault();
-    toiletsService.createOne({title, description, rating, imageUrl, creator: user._id})
-    .then(response => {
-        createToilet(response.data)
+      toiletsService.updateOne(idToilet, {title, description, rating, imageUrl, creator: user._id})
+      .then(response => {
         setTitle("");
-        setDescription("");
-        setRating("");
-        setImageUrl("");
-        console.log("ENTRA")
-    }).catch(err => console.log(err))
-}
+          setDescription("");
+          setRating("");
+          setImageUrl("");
+          
+      })
+  }
+  
 
-return (<div>
-    <form onSubmit={submitHandler} className="w-50 mx-auto mb-5">
+console.log("TOILETID!!!!", idToilet)
+
+
+  return (<div>
+    <form onSubmit={editHandler} className="w-50 mx-auto mb-5">
         <div className="mb-3">
             <label htmlFor="title" className="form-label">Title</label>
             <input type="text" className="form-control" id="title" aria-describedby="title" value={title} onChange={(e)=>setTitle(e.target.value)} />
@@ -69,10 +69,10 @@ return (<div>
             <input type="text" className="form-control" id="rating" value={rating} onChange={(e)=>setRating(e.target.value)}/>
         </div>
         <div className="mb-3">
-            <label htmlFor="picture" className="form-label">Upload an Image:</label>
-            <input id="picture" type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl"/>
+            <label htmlFor="description" className="form-label">Upload an Image:</label>
+            <input type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl"/>
         </div>
-        <button type="submit" className="btn btn-primary">Create project</button>
+        <button type="submit" className="btn btn-primary">Edit project</button>
     </form>
 
 
@@ -80,4 +80,4 @@ return (<div>
 
 )}
 
-export default AddToilet;
+export default EditIndividualToilet;

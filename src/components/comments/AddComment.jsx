@@ -4,22 +4,19 @@ import { AuthContext } from "../../context/auth.context";
 import commentService from "../../services/comment.service";
 import "./Comments.css"; 
 import {Link, useNavigate } from "react-router-dom";
+import userService from ""
 
-
-
-
-function AddComment({toiletId}) {
+function AddComment({createComment, idToilet}) {
     const navigate = useNavigate()
     const {user, isLoggedIn } = useContext(AuthContext);
 
 // ADDING A COMMENT BOX
    const [content, setContent] = useState("");
    const [imageUrl, setImageUrl] = useState("");
-   const [toilet, setToilet] = useState(toiletId)
+   const [toilet, setToilet] = useState(idToilet)
 
 
  
-
 // ******** this method handles the file upload ********
 const handleFileUpload = (e) => {
     // console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -30,7 +27,7 @@ const handleFileUpload = (e) => {
     // req.body to .create() method when creating a new movie in '/api/movies' POST route
     uploadData.append("imageUrl", e.target.files[0]);
  
-    commentService
+    userService
       .uploadImage(uploadData)
       .then(response => {
         // console.log("response is: ", response);
@@ -42,12 +39,10 @@ const handleFileUpload = (e) => {
 
 
   const submitHandler = (e) => {
-    console.log("hellllo part 1")
-     e.preventDefault();
-      console.log("hellllo part 2")
+      e.preventDefault();
     commentService.createOneComment({content, imageUrl, creator:user._id , toilet})
     .then(response => { 
-        console.log("promiss resuelta")
+      createComment(response.data)
         setContent("");
         setImageUrl("");
    

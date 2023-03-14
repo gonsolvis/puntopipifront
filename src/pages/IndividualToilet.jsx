@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import toiletsService from "../services/toilets.service";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import CommentTable from "../components/comments/CommentTable";
 import AddComment from "../components/comments/AddComment"
 import { useNavigate } from "react-router-dom";
-
+import { AuthContext } from "../context/auth.context";
+import EditIndividualToilet from "../pages/EditIndividualToilet"
 
 
 
@@ -13,20 +14,25 @@ function IndividualToilet() {
     let { idToilet } = useParams();
     console.log("PARAMS details", idToilet)
 
-  const [toilet, setToiletId] = useState({})
+    const { user } = useContext(AuthContext);
+
+
+  const [toilet, setToilet] = useState({comments: "patata"})
+  const [isLoading, setIsLoading] = useState(true)
  
 const navigate = useNavigate();
 
   useEffect(() => {
     toiletsService.getOne(idToilet)
       .then((data) => {
-        setToiletId(data.data)
+        setToilet(data.data)
+        setIsLoading(false)
      })
       .catch((err) => {
         console.log(err)})
 
   },[]);
-  console.log("toilet details", toilet)
+  console.log(user)
 
   //   // DELETE COMMENT
 const deleteHandler = (idToilet) => {
@@ -37,7 +43,7 @@ const deleteHandler = (idToilet) => {
     })
 }
 
-
+console.log(user)
 
   const getStars = (rating) => {
     let solidStr = <i className="fa-solid fa-star"></i>
@@ -63,9 +69,8 @@ const deleteHandler = (idToilet) => {
     }
   }
 
-  return (
-    <>
-        <h1 className="h1"> Toilet</h1>
+  return (<>
+    {isLoading ? (<p>Loading...</p>) : (<><h1 className="h1"> Toilet</h1>
 
     <div className="d-flex flex-row flex-wrap justify-content-center">        
       <div className="card m-4">
@@ -79,14 +84,18 @@ const deleteHandler = (idToilet) => {
                   {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                </p>
                  <Link to={`/`} className="btn btn-primary"> Go back to other Toilets</Link>
-              <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>
+{/* {user.isAdmin && <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>}    */}
+     <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>          
                    
           </div>
        </div> 
 </div>
-<AddComment toiletId={idToilet}/>
-<CommentTable toiletId={idToilet}/>
-    </>
+
+<CommentTable toiletComments={toilet.comments}/>
+<EditIndividualToilet idToilet={idToilet}/></>)}
+</>
+        
+    
   
   );
 }

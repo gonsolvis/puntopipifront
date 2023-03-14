@@ -22,13 +22,13 @@ function HomePage() {
 
   }, [])
 
+  const createToilet = (toilet) => {
+    setToilets([...toilets, toilet])
+  }
+
   const getStars = (rating) => {
     let solidStr = <i className="fa-solid fa-star"></i>
     let emptyStr = <i className="fa-sharp fa-regular fa-star"></i>
-
-
-    // let solidStr = <i className="fa-solid fa-toilet-paper"></i>
-    // let emptyStr = <i className="fa-sharp fa-regular fa-star"></i>
     let stars = Math.round(rating)
 
     if (stars === 0) {
@@ -47,15 +47,13 @@ function HomePage() {
   }
   return (
     <>
-      <br />
-      <h1> All Toilets </h1>
-      <br />
-  
 
+      <h1> All Toilets </h1>
+      
       {isLoggedIn ? (
   <div>
     <h2> Add Toilets </h2>
-    <AddToilet />
+    <AddToilet createToilet={createToilet}/>
   </div>
 ) : (
   <Link to={`/login`} className="btn btn-primary">

@@ -3,29 +3,18 @@ import commentService from "../../services/comment.service";
 import "./Comments.css";
 import avatarIcon from "./user_icon_149340 (3).png"
 import { Link, useNavigate } from "react-router-dom";
+import AddComment from "../comments/AddComment"
 
 
 
-function CommentTable({ toiletId }) {
-    const [comments, setComment] = useState([])
+function CommentTable({ toiletComments }) {
+    const [comments, setComments] = useState(toiletComments)
 
     const navigate = useNavigate();
 
-    
-
-    useEffect(() => {
-        commentService.getAllComments(toiletId)
-            .then((data) => {
-                setComment(data.data.comments)
-
-            })
-            .catch((err) => {
-
-                console.log(err)
-            })
-
-    }, [toiletId])
-    console.log(comments)
+    const createComment = (comment) => {
+      setComments([...comments, comment])
+    }
 
 // DELETE COMMENT
 const deleteHandler = (commentId) => {
@@ -40,6 +29,8 @@ const deleteHandler = (commentId) => {
   return (
     <div className="d-flex flex-column align-items-center " >
       <h2> Comments </h2>
+
+      <AddComment createComment={createComment}  />
   
       {comments.length === 0 ?
         <p>There are still no comments, be the first to add one! 

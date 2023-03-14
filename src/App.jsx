@@ -22,8 +22,7 @@ function App() {
       <Navbar />
 
       <Routes>
-      {/* This is the homepage full of maps */}
-        <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage />} />
       
         <Route path="/toilets/:idToilet" element={<IndividualToilet />} />
 
