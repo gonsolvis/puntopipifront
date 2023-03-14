@@ -12,8 +12,6 @@ const errorHandler = (err) => {
   throw err;
 };
 
-
-
 const uploadImage = (file) => {
   return api.post("/toilets/upload", file)
     .then(res => res.data)

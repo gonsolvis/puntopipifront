@@ -2,6 +2,7 @@ import "./SignupPage.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
+import uploadService from "../../services/upload.service";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ function SignupPage() {
   const [name, setName] = useState("");
   const [imgUrl, SetImgUrl] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [imageUrl, setImageUrl] = useState("");
 
   const navigate = useNavigate();
 
@@ -46,6 +48,29 @@ function SignupPage() {
         setErrorMessage(errorDescription);
       });
   };
+
+    // ******** this method handles the file upload ********
+    const handleFileUpload = (e) => {
+      // console.log("The file to be uploaded is: ", e.target.files[0]);
+      const uploadData = new FormData();
+      // imageUrl => this name has to be the same as in the model since we pass
+      // req.body to .create() method when creating a new movie in '/api/movies' POST route
+      uploadData.append("imageUrl", e.target.files[0]);
+      console.log("IMAGE URL", imageUrl)
+
+      uploadService
+          .uploadImage(uploadData)
+          .then(response => {
+              // console.log("response is: ", response);
+              // response carries "fileUrl" which we can use to update the state
+              setImageUrl(response.fileUrl);
+          })
+          .catch(err => console.log("Error while uploading the file: ", err));
+  };
+
+
+
+
 
   return (
     <div className="SignupPage">
