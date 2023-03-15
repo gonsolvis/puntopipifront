@@ -4,6 +4,7 @@ import toiletsService from "../../services/toilets.service"
 import { Link } from "react-router-dom";
 import AddToilet from "../../components/AddToilet/AddToilet";
 import { AuthContext } from "../../context/auth.context";
+import Places from "../maps/Places"
 
 function HomePage() {
   const [toilets, setToilets] = useState([])
@@ -22,13 +23,13 @@ function HomePage() {
 
   }, [])
 
+  const createToilet = (toilet) => {
+    setToilets([...toilets, toilet])
+  }
+
   const getStars = (rating) => {
     let solidStr = <i className="fa-solid fa-star"></i>
     let emptyStr = <i className="fa-sharp fa-regular fa-star"></i>
-
-
-    // let solidStr = <i className="fa-solid fa-toilet-paper"></i>
-    // let emptyStr = <i className="fa-sharp fa-regular fa-star"></i>
     let stars = Math.round(rating)
 
     if (stars === 0) {
@@ -47,15 +48,12 @@ function HomePage() {
   }
   return (
     <>
-      <br />
-      <h1> All Toilets </h1>
-      <br />
-  
 
+      
       {isLoggedIn ? (
   <div>
-    <h2> Add Toilets </h2>
-    <AddToilet />
+    <h1> Add Toilets </h1>
+    <AddToilet createToilet={createToilet}/>
   </div>
 ) : (
   <Link to={`/login`} className="btn btn-primary">
@@ -63,7 +61,10 @@ function HomePage() {
   </Link>
 )}
 
-
+<h1> All Toilets </h1>
+<div className="w-100 ">
+d<Places /> 
+</div>
 
       <div className="d-flex flex-row flex-wrap justify-content-center">
         {toilets.map(toilet => {
