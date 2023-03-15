@@ -12,12 +12,12 @@ import EditIndividualToilet from "../pages/EditIndividualToilet"
 
 function IndividualToilet() {
   let { idToilet } = useParams();
-  console.log("PARAMS details", idToilet)
+
 
   const { user } = useContext(AuthContext);
   const [toilet, setToilet] = useState({ comments: "patata" })
   const [isLoading, setIsLoading] = useState(true)
-
+  const [isSameUser, setisSameUser] = useState("")
   const [showEditToilet, setShowEditToilet] = useState(false);
 
   const navigate = useNavigate();
@@ -27,12 +27,24 @@ function IndividualToilet() {
       .then((data) => {
         setToilet(data.data)
         setIsLoading(false)
+        setisSameUser(data.data.creator._id)
+        setTimeout(()=> {
+          
+          
+       }, )
       })
       .catch((err) => {
         console.log(err)
       })
 
   }, []);
+
+
+console.log("hello auth context", user)
+
+
+console.log("hello state", isSameUser)
+
 
   // EDIT
   function handleEditToiletClick() {
@@ -74,7 +86,6 @@ function IndividualToilet() {
     }
   }
 
-console.log("toilet", toilet.imageUrl)
   return (<>
     {isLoading ? (<p>Loading...</p>) : (<><h1 className="h1"> Toilet</h1>
 
@@ -90,13 +101,26 @@ console.log("toilet", toilet.imageUrl)
               {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
             </p>
             <Link to={`/`} className="btn btn-primary"> Go back to other Toilets</Link>
-            {user.isAdmin && <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>}   
+            {(user.isAdmin || (user._id && user._id === isSameUser)) && (
+  <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>
+)}
+
+
+
+
+
+
+  
 
 
           </div>
         </div>
       </div>
-      <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button>
+      
+      {/* <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button>
+{showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />} */}
+
+      {user._id === isSameUser ? <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button> : null}
 {showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />}
 
       <CommentTable toiletComments={toilet.comments} />

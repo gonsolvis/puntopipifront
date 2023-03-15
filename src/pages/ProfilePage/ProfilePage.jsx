@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import MyToilets from "./MyToilets";
 import EditProfilePage from "./EditProfilePage";
 import userService from "../../services/user.service";
+import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
 
@@ -13,7 +14,7 @@ function ProfilePage() {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [usuario, setUsuario] = useState(null);
 
-
+  const navigate = useNavigate();
 
   function handleEditProfileClick() {
     setShowEditProfile(!showEditProfile); }
@@ -24,6 +25,7 @@ function ProfilePage() {
       .then(response => {
         console.log("GET ONE USER ROUTE", response.data)
       setUsuario(response.data)
+      setShowEditProfile(false)
       
       })
       .catch(err => console.log("ERROR PUT", err))
@@ -45,6 +47,15 @@ function ProfilePage() {
   // edit
 
 
+    // DELETE COMMENT
+  const deleteHandler = (idProfile) => {
+    userService.deleteProject(idProfile)
+      .then(response => {
+        console.log(response);
+        navigate("/", { replace: true });
+      })
+  }
+
   const editProfile = (editOneProfile) => {
     setUsuario(editOneProfile)
 }
@@ -57,16 +68,18 @@ function ProfilePage() {
       <div className="d-flex flex-row flex-wrap justify-content-center">
         <div className="card m-4 ">
           <div className="card-body">
-            <img src={usuario?.imageUrl} alt="not working" className="card-text" />
+           {!isLoading && <img src={usuario?.imageUrl} alt="not working" className="card-text" />}
             <p className="card-text"> Full Name: {usuario.name}</p>
-            <p className="card-text"> Email Adress: {usuario.email}</p>
-            <p className="card-text"> Am I an Admin?:  {usuario.isAdmin}</p>
+            <p className="card-text"> Email: {usuario.email}</p>
+            <p className="card-text"> Am I an Admin?{usuario.isAdmin?<p> Yes</p>: <p> No</p> }</p>
 
             {/* <p className="card-text">{formattedIat}</p> */}
             <Link to={`/`} className="btn btn-primary">
               {" "}
               Go back to Home Page
             </Link>
+            {user.isAdmin && <button className="btn btn-danger mx-2" onClick={() => deleteHandler(user._id)}>Delete</button>}
+
 
           </div>
         </div>

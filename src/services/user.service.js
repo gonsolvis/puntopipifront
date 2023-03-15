@@ -40,11 +40,10 @@ class UserService {
     return this.api.put(`/user/profile/edit/${id}`, requestBody);
   }
 
-//   // DELETE /api/examples/:id
-//   deleteProject = async (id) => {
-//     return this.api.delete(`/profile/${id}`);
-//   } 
-
+  // DELETE /api/examples/:id
+  deleteProject = async (id) => {
+    return this.api.delete(`/profile/delete/${id}`);
+  } 
 
 }
 
