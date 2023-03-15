@@ -8,6 +8,7 @@ function AddToilet() {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [address, setAddress] = useState("");
     const [rating, setRating] = useState("");
     const [imageUrl, setImageUrl] = useState("");
 
@@ -40,12 +41,14 @@ function AddToilet() {
 
 const submitHandler = (e) => {
     e.preventDefault();
-    toiletsService.createOne({title, description, rating, imageUrl, creator: user._id})
+    toiletsService.createOne({title, description, address, rating, imageUrl, creator: user._id})
     .then(response => {
          setTitle("");
         setDescription("");
+        setAddress("");
         setRating("");
         setImageUrl("");
+        navigate("/");
         navigate("/");
     })
     .catch(err => console.log(err))
@@ -62,7 +65,11 @@ return (<div>
             <input type="text" className="form-control" id="description" value={description} onChange={(e)=>setDescription(e.target.value)}/>
         </div>
         <div className="mb-3">
-            <label htmlFor="description" className="form-label">rating</label>
+            <label htmlFor="description" className="form-label">Address</label>
+            <input type="text" className="form-control" id="description" value={address} onChange={(e)=>setAddress(e.target.value)}/>
+        </div>
+        <div className="mb-3">
+            <label htmlFor="description" className="form-label">Rating</label>
             <input type="text" className="form-control" id="rating" value={rating} onChange={(e)=>setRating(e.target.value)}/>
         </div>
         <div className="mb-3">
@@ -78,3 +85,10 @@ return (<div>
 )}
 
 export default AddToilet;
+
+
+
+
+
+
+

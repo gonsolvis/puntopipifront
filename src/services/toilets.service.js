@@ -32,6 +32,7 @@ class ToiletsService {
   
   // GET /api/examples
   getAll = async () => {
+    console.log("getAll")
     return this.api.get('/toilets');
   }
 
