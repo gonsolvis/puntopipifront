@@ -38,6 +38,9 @@ function AddToilet({ createToilet }) {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        if(imageUrl === "") {
+            return;
+        }
         toiletsService.createOne({ title, description, rating, imageUrl, creator: user._id })
             .then(response => {
                 createToilet(response.data)

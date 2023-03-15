@@ -20,7 +20,7 @@ function ProfilePage() {
     authenticateUser();
   }, []);
 
-  console.log(user)
+  console.log("user", user)
 
   // const formattedIat = new Date(user.iat * 1000).toLocaleTimeString([], {
   //   hour: "2-digit",
@@ -39,7 +39,7 @@ function ProfilePage() {
       <div className="d-flex flex-row flex-wrap justify-content-center">
         <div className="card m-4 ">
           <div className="card-body">
-          <p className="card-text">{user.imageUrl}</p>
+          <img  src={user.imageUrl} alt="not working" className="card-text"/> 
               <p className="card-text"> Full Name: {user.name}</p>
                 <p className="card-text"> Email Adress: {user.email}</p>
     
