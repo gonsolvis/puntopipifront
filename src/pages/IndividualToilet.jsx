@@ -7,7 +7,7 @@ import AddComment from "../components/comments/AddComment"
 import { useNavigate } from "react-router-dom";
 
 
-let toiletPaperIcon = <i className="fa-solid fa-toilet fa-1x"></i>
+
 
 function IndividualToilet() {
     let { idToilet } = useParams();
@@ -26,7 +26,7 @@ const navigate = useNavigate();
         console.log(err)})
 
   },[]);
-  console.log("toilet details", idToilet)
+  console.log("toilet details", toilet)
 
   //   // DELETE COMMENT
 const deleteHandler = (idToilet) => {
@@ -69,13 +69,11 @@ const deleteHandler = (idToilet) => {
 
     <div className="d-flex flex-row flex-wrap justify-content-center">        
       <div className="card m-4">
-      {toiletPaperIcon}
-          <div className="card-body">
-          <p className="card-text">{toilet._id}</p>
-                <p className="card-text">{toilet.title}</p>
-                <p className="card-text">{toilet.description}</p>
+             <div className="card-body">
+             <img  src={toilet.imageUrl} alt="not working" className="card-text"/>
+                <p className="card-text">Title: {toilet.title}</p>
+                <p className="card-text"> Description: {toilet.description}</p>
                 <p className="card-text">{getStars(toilet.rating)}</p>
-                <p className="card-text">{toilet.imageUrl}</p>
                 <p className="card-text">
                   {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
                   {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}

@@ -29,6 +29,10 @@ class CommentService {
     return this.api.get(`/comment/${id}`);
   }
 
+  uploadImage = async (file) => {
+    return this.api.post("/comment/upload", file)
+  }
+
 //   // GET /api/examples/:id
 //   getOneComment = async (id) => {
 //     return this.api.get(`/api/examples/${id}`);

@@ -32,7 +32,7 @@ const deleteHandler = (commentId) => {
     commentService.deleteComment(commentId)
       .then(response => {
         console.log(response);
-        navigate("/");
+        navigate("/", { replace: true });
       })
   }
 
@@ -54,12 +54,19 @@ const deleteHandler = (commentId) => {
                   <img src={avatarIcon} width="30" className="user-img rounded-circle mr-2" />
                   <span>
                     <small className="font-weight-bold text-primary m-3">
-                      {/* {comment.creator.name} */}
+                      {comment.creator.name}
                     </small>
                     <small className="font-weight-bold">
                       {comment.content}
                     </small>
                   </span>
+
+                  <div>
+               
+                <img src={comment.imageUrl} alt="movie" width="20" />
+               
+              </div>
+                  
                 </div>
                 <small>
                   {new Date(comment.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
