@@ -63,7 +63,7 @@ function HomePage() {
 
 <h1> All Toilets </h1>
 <div className="w-100 ">
-d<Places /> 
+<Places /> 
 </div>
 
       <div className="d-flex flex-row flex-wrap justify-content-center">

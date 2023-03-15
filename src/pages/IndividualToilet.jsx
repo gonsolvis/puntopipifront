@@ -15,10 +15,10 @@ function IndividualToilet() {
   console.log("PARAMS details", idToilet)
 
   const { user } = useContext(AuthContext);
-
-
   const [toilet, setToilet] = useState({ comments: "patata" })
   const [isLoading, setIsLoading] = useState(true)
+
+  const [showEditToilet, setShowEditToilet] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,6 +34,15 @@ function IndividualToilet() {
 
   }, []);
 
+  // EDIT
+  function handleEditToiletClick() {
+    setShowEditToilet(!showEditToilet); }
+
+    const editToilet = (editOneToilet) => {
+          setToilet(editOneToilet)
+          setShowEditToilet(false);
+    }
+    
 
   //   // DELETE COMMENT
   const deleteHandler = (idToilet) => {
@@ -65,14 +74,14 @@ function IndividualToilet() {
     }
   }
 
-
+console.log("toilet", toilet.imageUrl)
   return (<>
     {isLoading ? (<p>Loading...</p>) : (<><h1 className="h1"> Toilet</h1>
 
       <div className="d-flex flex-row flex-wrap justify-content-center">
         <div className="card m-4">
           <div className="card-body">
-            <img src={toilet.imageUrl} alt="not working" className="card-text w-50" />
+            <img src={toilet ? toilet.imageUrl : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/800px-Cat_August_2010-4.jpg"} alt="not working" className="card-text w-50" />
             <p className="card-text">Title: {toilet.title}</p>
             <p className="card-text"> Description: {toilet.description}</p>
             <p className="card-text"> Overall Rating: {getStars(toilet.rating)}</p>
@@ -81,16 +90,23 @@ function IndividualToilet() {
               {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
             </p>
             <Link to={`/`} className="btn btn-primary"> Go back to other Toilets</Link>
-            {/* {user.isAdmin && <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>}    */}
-            <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>
+            {user.isAdmin && <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>}   
+
 
           </div>
         </div>
       </div>
+      <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button>
+{showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />}
 
       <CommentTable toiletComments={toilet.comments} />
 
-      <EditIndividualToilet idToilet={idToilet} /></>)}
+ </>)}
+
+
+      
+     
+      
   </>
 
 

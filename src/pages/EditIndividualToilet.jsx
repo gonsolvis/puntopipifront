@@ -3,9 +3,11 @@ import toiletsService from "../services/toilets.service";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import uploadService from "../services/upload.service";
 
 
-function EditIndividualToilet({idToilet}) {
+
+function EditIndividualToilet({editToilet, idToilet}) {
   const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ function EditIndividualToilet({idToilet}) {
     // req.body to .create() method when creating a new movie in '/api/movies' POST route
     uploadData.append("imageUrl", e.target.files[0]);
        console.log(imageUrl)
-     toiletsService
+       uploadService
       .uploadImage(uploadData)
       .then(response => {
         // console.log("response is: ", response);
@@ -40,9 +42,14 @@ function EditIndividualToilet({idToilet}) {
   //   // edit toilet
   const editHandler = (e) => {
     e.preventDefault();
+    if(imageUrl === "") {
+      return;
+    }
+    
       toiletsService.updateOne(idToilet, {title, description, rating, imageUrl, creator: user._id})
       .then(response => {
-        setTitle("");
+        editToilet(response.data)
+          setTitle("");
           setDescription("");
           setRating("");
           setImageUrl("");
@@ -72,7 +79,7 @@ console.log("TOILETID!!!!", idToilet)
             <label htmlFor="description" className="form-label">Upload an Image:</label>
             <input type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl"/>
         </div>
-        <button type="submit" className="btn btn-primary">Edit project</button>
+        <button type="submit" className="btn btn-primary">Submit </button>
     </form>
 
 
