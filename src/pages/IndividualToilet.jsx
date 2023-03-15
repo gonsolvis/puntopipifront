@@ -14,7 +14,7 @@ function IndividualToilet() {
   let { idToilet } = useParams();
 
 
-  const { user } = useContext(AuthContext);
+  const { user, isLoggedIn } = useContext(AuthContext);
   const [toilet, setToilet] = useState({ comments: "patata" })
   const [isLoading, setIsLoading] = useState(true)
   const [isSameUser, setisSameUser] = useState("")

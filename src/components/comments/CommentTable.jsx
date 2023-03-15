@@ -11,7 +11,7 @@ function CommentTable({ toiletComments }) {
 
   const { user} = useContext(AuthContext);
   const [comments, setComments] = useState(toiletComments)
-  
+
 
   const navigate = useNavigate();
 
