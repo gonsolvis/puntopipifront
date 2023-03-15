@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import AddToilet from "../../components/AddToilet/AddToilet";
 import { AuthContext } from "../../context/auth.context";
 import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
-import Map from "../../components/googleMaps/map";
+import Map from "../../components/googleMaps/Map";
+
 
 function HomePage() {
   const [toilets, setToilets] = useState([])
@@ -47,33 +48,42 @@ function HomePage() {
     }
   }
 
-  
+  const [isLoaded, setIsLoaded] = useState(false);
+
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
+    script.async = true;
+    script.defer = true;
+    script.onerror = () => {
+      setIsLoaded(false);
+    };
+    script.onload = () => {
+      setIsLoaded(true);
+    };
+    document.head.appendChild(script);
+  }, []);
 
   return (
     <>
-       <h1> All Toilets </h1>
-<Map/>
-      
-{/* 
-    //   {isLoggedIn ? ( */}
-          {/* // <input className="form-control me-2" id="pac-input" type="text" placeholder="Search..." />
 
-          // // <div id="map"></div>
+      <div>
+        <h1> All Toilets </h1>
 
-          // // <script async */}
-          {/* // //   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkI1bljJ2mPXRx1mxgGs1Ow1Bqn_YOB1I&callback=initMap"> */}
-          {/* // // </script> */}
-          {/* // // <script src="../../components/googleMaps/app.js"></script>
-          // // <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkI1bljJ2mPXRx1mxgGs1Ow1Bqn_YOB1I&callback=initMap"></script>
+        {isLoaded && <Map />}
+      </div>
 
-          // <h2> Add Toilets </h2>
-
-
-      // ) : (
-      //   <Link to={`/login`} className="btn btn-primary">
-      //     Log in to add a toilet
-      //   </Link>
-      // )} */}
+      {isLoggedIn ? (
+        <div>
+          <h1> Add Toilets </h1>
+          {/* <AddToilet createToilet={createToilet} /> */}
+        </div>
+      ) : (
+        <Link to={`/login`} className="btn btn-primary">
+          Log in to add a toilet
+        </Link>
+      )}
 
 
 
