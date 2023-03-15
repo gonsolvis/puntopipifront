@@ -1,18 +1,26 @@
-import "./ProfilePage.css";
-import { useContext, useEffect } from "react";
-// import { useState } from "react"
-// import { useParams } from "react-router";
-// import { userContext } from "../../context/user.context";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth.context"
 import { Link } from "react-router-dom";
+import MyToilets from "./MyToilets";
+import EditProfilePage from "./EditProfilePage";
 
 
 function ProfilePage() {
   const { user, authenticateUser } = useContext(AuthContext);
 
+  const [showEditProfile, setShowEditProfile] = useState(false);
+
+  function handleEditProfileClick() {
+    setShowEditProfile(!showEditProfile);
+  }
+
+
+
   useEffect(() => {
     authenticateUser();
   }, []);
+
+  console.log("user", user)
 
   // const formattedIat = new Date(user.iat * 1000).toLocaleTimeString([], {
   //   hour: "2-digit",
@@ -29,18 +37,30 @@ function ProfilePage() {
       <h1 className="h1"> My Profile</h1>
 
       <div className="d-flex flex-row flex-wrap justify-content-center">
-        <div className="card m-4 w-25 ">
+        <div className="card m-4 ">
           <div className="card-body">
-            <p className="card-text">{user.email}</p>
-            <p className="card-text">{user.name}</p>
-            <p className="card-text">{user.imageUrl}</p>
+          <img  src={user.imageUrl} alt="not working" className="card-text"/> 
+              <p className="card-text"> Full Name: {user.name}</p>
+                <p className="card-text"> Email Adress: {user.email}</p>
+    
             {/* <p className="card-text">{formattedIat}</p> */}
             <Link to={`/`} className="btn btn-primary">
               {" "}
               Go back to Home Page
             </Link>
+
           </div>
         </div>
+      </div>
+
+      <div>
+
+        <button className="btn btn-primary mb-5" onClick={handleEditProfileClick}>Edit Profile</button>
+
+        {showEditProfile && <EditProfilePage />}
+
+
+        <MyToilets />
       </div>
     </>
   );

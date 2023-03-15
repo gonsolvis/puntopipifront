@@ -3,32 +3,22 @@ import commentService from "../../services/comment.service";
 import "./Comments.css";
 import avatarIcon from "./user_icon_149340 (3).png"
 import { Link, useNavigate } from "react-router-dom";
+import AddComment from "../comments/AddComment"
 
 
 
-function CommentTable({ toiletId }) {
-    const [comments, setComment] = useState([])
+function CommentTable({ toiletComments }) {
+  const [comments, setComments] = useState(toiletComments)
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    
+  const createComment = (comment) => {
+    setComments([...comments, comment])
+  }
 
-    useEffect(() => {
-        commentService.getAllComments(toiletId)
-            .then((data) => {
-                setComment(data.data.comments)
 
-            })
-            .catch((err) => {
-
-                console.log(err)
-            })
-
-    }, [toiletId])
-    console.log(comments)
-
-// DELETE COMMENT
-const deleteHandler = (commentId) => {
+  // DELETE COMMENT
+  const deleteHandler = (commentId) => {
     commentService.deleteComment(commentId)
       .then(response => {
         console.log(response);
@@ -40,14 +30,16 @@ const deleteHandler = (commentId) => {
   return (
     <div className="d-flex flex-column align-items-center " >
       <h2> Comments </h2>
-  
+
+      <AddComment createComment={createComment} />
+
       {comments.length === 0 ?
-        <p>There are still no comments, be the first to add one! 
- <i className="fa-regular fa-face-sad-cry fa-2x m-3"></i></p>
+        <p>There are still no comments, be the first to add one!
+          <i className="fa-regular fa-face-sad-cry fa-2x m-3"></i></p>
         :
         comments.map(comment => {
           return (
-  
+
             <div className="card p-3 w-75 m-2" key={comment._id}>
               <div className="d-flex justify-content-between align-items-center">
                 <div className="user d-flex flex-row align-items-center">
@@ -62,11 +54,12 @@ const deleteHandler = (commentId) => {
                   </span>
 
                   <div>
-               
-                <img src={comment.imageUrl} alt="movie" width="20" />
-               
-              </div>
-                  
+                    <br />
+
+                    <img src={comment.imageUrl} alt="Comment Image" className="user-img rounded-circle w-25 mr-2" />
+
+                  </div>
+
                 </div>
                 <small>
                   {new Date(comment.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}

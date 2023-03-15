@@ -35,12 +35,10 @@ class UserService {
   }
 
 
-  
-
-//   // PUT /api/examples/:id
-//   updateOne = async (id, requestBody) => {
-//     return this.api.put(`/profile/${id}`, requestBody);
-//   }
+  // PUT /api/examples/:id
+  updateOneProfile = async (id, requestBody) => {
+    return this.api.put(`/user/profile/edit/${id}`, requestBody);
+  }
 
 //   // DELETE /api/examples/:id
 //   deleteProject = async (id) => {
