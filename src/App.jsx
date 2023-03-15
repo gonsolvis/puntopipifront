@@ -15,6 +15,7 @@ import Footer from "./components/Navbar/Footer";
 import AddToilet from "./components/AddToilet/AddToilet";
 import IndividualToilet from "./pages/IndividualToilet";
 import CommentTable from "./components/comments/CommentTable";
+import Places from "../src/pages/maps/Places"
 
 function App() {
   return (
@@ -22,12 +23,16 @@ function App() {
       <Navbar />
 
       <Routes>
-      {/* This is the homepage full of maps */}
-        <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage />} />
       
         <Route path="/toilets/:idToilet" element={<IndividualToilet />} />
 
           <Route path="/comment" element={<CommentTable />} />
+
+          
+          {/* <Route path="/map" element={<MapIndex />} /> */}
+
+          <Route path="/places" element={<Places />} />
 
 
         <Route path="/profile/:idProfile" element={<ProfilePage />} />
