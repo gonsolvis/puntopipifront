@@ -46,7 +46,7 @@ function Map() {
               <p style="font-style: italic; font-size: 1.2rem">${toilet.title}</p>
               <p>${toilet.address}</p>
               <img style="width:350px; height:150px" src="${toilet.imageUrl}" alt="img-${toilet.title}">`,
-            position: {lat: toilet.latitude + .0009, lng: toilet.longitude}
+            position: {lat: toilet.latitude + .0012, lng: toilet.longitude}
           });
           const marker = new window.google.maps.Marker({
             position: latLng,
@@ -90,7 +90,7 @@ function Map() {
   return (
     <div>
       <input id="pac-input" type="text" placeholder="Search Box" />
-      <div id="map" style={{ height: '400px', width: '100%' }}></div>
+      <div id="map" style={{ height: '400px', width: '70%' }}></div>
     </div>
   );
 }

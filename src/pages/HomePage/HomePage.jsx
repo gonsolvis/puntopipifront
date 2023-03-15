@@ -77,7 +77,7 @@ function HomePage() {
       {isLoggedIn ? (
         <div>
           <h1> Add Toilets </h1>
-          {/* <AddToilet createToilet={createToilet} /> */}
+          <AddToilet createToilet={createToilet} />
         </div>
       ) : (
         <Link to={`/login`} className="btn btn-primary">
