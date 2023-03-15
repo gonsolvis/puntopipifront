@@ -71,22 +71,10 @@ function HomePage() {
       <div>
         <h1> All Toilets </h1>
 
-        {isLoaded && <Map />}
+        {/* {isLoaded && <Map />} */}
       </div>
 
       {isLoggedIn ? (
-<<<<<<< HEAD
-        <div>
-          <h1> Add Toilets </h1>
-          <AddToilet createToilet={createToilet} />
-        </div>
-      ) : (
-        <Link to={`/login`} className="btn btn-primary">
-          Log in to add a toilet
-        </Link>
-      )}
-
-=======
   <div>
     <h1> Add Toilets </h1>
     <AddToilet createToilet={createToilet}/>
@@ -96,11 +84,8 @@ function HomePage() {
     Log in to add a toilet
   </Link>
 )}
->>>>>>> dev
 
-<h1> All Toilets </h1>
 <div className="w-100 ">
-d<Places /> 
 </div>
 
       <div className="d-flex flex-row flex-wrap justify-content-center">

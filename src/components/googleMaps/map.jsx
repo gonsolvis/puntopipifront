@@ -60,7 +60,7 @@ function Map() {
         let newArray = newMarkers.filter( marker => marker !== undefined) 
         setMarkers(newArray);
         console.log(newArray);
-        setInfoWindows(newArray.map(newMarker => newMarker.infoWindow));
+        setInfoWindows(newArray.map(newMarker => newMarker.infoWindow) );
       })
       .catch(err => console.log(err));
 
