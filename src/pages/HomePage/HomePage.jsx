@@ -4,7 +4,10 @@ import toiletsService from "../../services/toilets.service"
 import { Link } from "react-router-dom";
 import AddToilet from "../../components/AddToilet/AddToilet";
 import { AuthContext } from "../../context/auth.context";
-import Places from "../maps/Places"
+import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
+import Map from "../../components/googleMaps/Map";
+import MapContainer from "../../components/googleMaps/MarkerMap";
+
 
 function HomePage() {
   const [toilets, setToilets] = useState([])
@@ -49,7 +52,12 @@ function HomePage() {
   return (
     <>
 
-      
+      <div>
+        <h1> All Toilets </h1>
+<Map/>
+        {/* {isLoaded && <Map />} */}
+      </div>
+
       {isLoggedIn ? (
   <div>
     <h1> Add Toilets </h1>

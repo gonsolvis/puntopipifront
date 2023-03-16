@@ -28,8 +28,11 @@ function App() {
         <Route path="/toilets/:idToilet" element={<IndividualToilet />} />
 
           <Route path="/comment" element={<CommentTable />} />
-       
-          <Route path="/places" element={<Places />} />
+
+          
+          {/* <Route path="/map" element={<MapIndex />} /> */}
+
+          {/* <Route path="/places" element={<Places />} /> */}
 
 
         <Route path="/profile/:idProfile" element={<ProfilePage />} />

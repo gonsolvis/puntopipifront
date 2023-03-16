@@ -60,3 +60,7 @@ const MapBar = () => {
 };
 
 export default MapBar;
+<<<<<<< HEAD
+=======
+  
+>>>>>>> rob

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
+
 
 
 function Map() {
@@ -83,7 +85,7 @@ function Map() {
     //     map.setZoom(17);
     //   }
     //   newMarker.setPosition(place.geometry.location);
-    //   newMarker.setVisible(true);
+    //   newManpmrker.setVisible(true);
     // });
   }, []);
 
