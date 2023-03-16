@@ -93,6 +93,7 @@ console.log("hello state", isSameUser)
         <div className="card m-4">
           <div className="card-body">
             <img src={toilet ? toilet.imageUrl : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/800px-Cat_August_2010-4.jpg"} alt="not working" className="card-text w-50" />
+            <p className="card-text"> Full name: {user.name}</p>
             <p className="card-text">Title: {toilet.title}</p>
             <p className="card-text"> Description: {toilet.description}</p>
             <p className="card-text"> Address:  {toilet.address}</p>

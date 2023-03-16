@@ -29,11 +29,10 @@ function MyToilets() {
           
           <div className="card m-4 p-2" key={toilet._id}>
         
-            <div className="card-body">
-              <p className="card-text">{toilet._id}</p>
-              <p className="card-text">{toilet.title}</p>
+            <div className="card-body d-flex flex-column justify-content-center">
+            <p className="card-text h3">{toilet.title}</p>
               <p className="card-text">{toilet.description}</p>
-              <img src={toilet.imageUrl} alt="not working" className="card-text" />
+             <div><img src={toilet.imageUrl} alt="not working" height="200" width="200"  className="card-text" /></div> 
               <p className="card-text">
                 {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
                 {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}

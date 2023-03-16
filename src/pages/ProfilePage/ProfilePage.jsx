@@ -61,8 +61,10 @@ function ProfilePage() {
 }
 
 
+
   return (
     <>
+    <div className="d-flex flex-column flex-wrap align-content-center" >
       {!isLoading && isLoggedIn && usuario && user ? (usuario._id === user._id ? (<><h1 className="h1"> My Profile</h1>
 
       <div className="d-flex flex-row flex-wrap justify-content-center">
@@ -90,6 +92,7 @@ function ProfilePage() {
         {showEditProfile && <EditProfilePage editProfile={editProfile}/>}
         <MyToilets />
       </div></>) : (<p>Este no es tu perfil</p>)) : <p>Loading...</p>}
+      </div>
     </>
   );
 }

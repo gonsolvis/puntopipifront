@@ -29,7 +29,7 @@ function App() {
 
           <Route path="/comment" element={<CommentTable />} />
        
-          <Route path="/places" element={<Places />} />
+          {/* <Route path="/places" element={<Places />} /> */}
 
 
         <Route path="/profile/:idProfile" element={<ProfilePage />} />
