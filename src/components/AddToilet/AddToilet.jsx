@@ -4,6 +4,9 @@ import toiletsService from "../../services/toilets.service";
 import uploadService from "../../services/upload.service"
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
+import Map from "../googleMaps/Map"
+import LocationSearchInput from "../googleMaps/GerardAutoComplete";
+import Geocode from "react-geocode";
 
 function AddToilet({ createToilet }) {
 
@@ -14,13 +17,21 @@ function AddToilet({ createToilet }) {
     const [imageUrl, setImageUrl] = useState("");
     const [timestamps, setTimestamp] = useState("");
     const [clean, setClean] = useState("");
-     const [latitude, setLatitude] = useState("");
-    const [longitude, setLongitude] = useState("");
     const { user } = useContext(AuthContext);
 
-
+    window.setAddress = (lat, lng) => {
+        console.log('setAddress from window.')
+        getAddressFromLatLng(lat, lng);
+    }
 
     const navigate = useNavigate();
+
+    const getAddressFromLatLng = (lat, lng) => {
+        Geocode.setApiKey("AIzaSyAkI1bljJ2mPXRx1mxgGs1Ow1Bqn_YOB1I");
+        Geocode.fromLatLng(lat, lng).then((response) => {
+            setAddress(response.results[0].formatted_address);
+        })
+    }
     
 
     // ******** this method handles the file upload ********
@@ -42,14 +53,19 @@ function AddToilet({ createToilet }) {
             .catch(err => console.log("Error while uploading the file: ", err));
     };
 
-
+    const getAdressHandler = (latLng, address) =>{
+        window.latitude = latLng.lat;
+        window.longitude = latLng.lng;
+        console.log('ADDRESS ', address);
+        setAddress(address);
+      }
 
     const submitHandler = (e) => {
         e.preventDefault();
         if(imageUrl === "") {
             return;
         }
-        toiletsService.createOne({ title, description, rating, imageUrl, creator: user._id, timestamps, clean, address, latitude, longitude })
+        toiletsService.createOne({ title, description, rating, imageUrl, creator: user._id, timestamps, clean, address, latitude: window.latitude, longitude: window.longitude })
             .then(response => {
                 createToilet(response.data)
                 setTitle("");
@@ -58,8 +74,8 @@ function AddToilet({ createToilet }) {
                 setTimestamp("");
                 setClean("");
                 setAddress("");
-                setLatitude("");
-                setLongitude("");
+                window.latitude = undefined;
+                window.longitude = undefined;
                 setImageUrl("");
                 console.log("ENTRA")
             }).catch(err => console.log(err))
@@ -77,15 +93,7 @@ function AddToilet({ createToilet }) {
             </div>
              <div className="mb-3">
                 <label htmlFor="description" className="form-label">Address</label>
-                <input type="text" className="form-control" id="description" value={address} onChange={(e) => setAddress(e.target.value)} />
-            </div>
-              <div className="mb-3">
-                <label htmlFor="description" className="form-label">longitude</label>
-                <input type="text" className="form-control" id="description" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
-            </div>
-              <div className="mb-3">
-                <label htmlFor="description" className="form-label">latitude</label>
-                <input type="text" className="form-control" id="description" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
+                <LocationSearchInput getAdressHandler={getAdressHandler} address={address} setAddress={setAddress}/>
             </div>
             <div className="mb-3">
                 <label htmlFor="description" className="form-label">rating</label>

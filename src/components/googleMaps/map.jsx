@@ -1,12 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
+import AddToilet from '../AddToilet/AddToilet';
 
 
 
-function Map() {
+
+function Map({ canAddMarker }) {
   const [markers, setMarkers] = useState([]);
   const [infoWindows, setInfoWindows] = useState([]);
+  const [map, setMap] = useState(null);
+  const [marker, setMarker] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
+  window.createMarker = (latLng) => {
+    const lat = latLng.lat;
+    const lng = latLng.lng;
+
+    const newMarker = new window.google.maps.Marker({
+      position: latLng,
+      map: map,
+      draggable: true
+    });
+    setMarker(newMarker);
+    setLatitude(lat);
+    setLongitude(lng);
+
+    window.latitude = lat;
+    window.longitude = lng;
+  }
 
   useEffect(() => {
     const barcelonaMap = {
@@ -19,14 +42,17 @@ function Map() {
       barcelonaMap
     );
 
-    // const input = document.getElementById('pac-input');
-    // const options = {
-    //   fields: ['formatted_address', 'geometry', 'name'],
-    //   strictBounds: false,
-    //   types: []
-    // };
+    setMap(map);
 
-    // const autocomplete = new google.maps.places.Autocomplete(
+
+    const input = document.getElementById('pac-input');
+    const options = {
+      fields: ['formatted_address', 'geometry', 'name'],
+      strictBounds: false,
+      types: []
+    };
+
+    // const autocomplete = new window.google.maps.places.Autocomplete(
     //   input,
     //   options
     // );
@@ -65,6 +91,35 @@ function Map() {
       })
       .catch(err => console.log(err));
 
+      map.addListener('click', event => {
+        const lat = event.latLng.lat();
+        const lng = event.latLng.lng();
+
+        if (!canAddMarker) {
+          return;
+        }
+
+        if (marker) {
+          marker.setMap(null);
+        }
+
+        const newMarker = new window.google.maps.Marker({
+          position: event.latLng,
+          map: map,
+          draggable: true
+        });
+        setMarker(newMarker);
+        setLatitude(lat);
+        setLongitude(lng);
+
+        window.setAddress(lat, lng);
+
+        window.latitude = lat;
+        window.longitude = lng;
+      });
+
+
+
     // autocomplete.addListener('place_changed', () => {
     //   const newMarker = new window.google.maps.Marker({
     //     position: undefined,
@@ -84,7 +139,7 @@ function Map() {
     //     map.setZoom(17);
     //   }
     //   newMarker.setPosition(place.geometry.location);
-    //   newManpmrker.setVisible(true);
+    //   newMarker.setVisible(true);
     // });
   }, []);
 
@@ -92,9 +147,14 @@ function Map() {
     <div>
       <input id="pac-input" type="text" placeholder="Search Box" />
       <div id="map" style={{ height: '400px', width: '70%' }}></div>
+      {marker && (
+        <div>
+          <p>Latitude: {latitude}</p>
+          <p>Longitude: {longitude}</p>
+        </div>
+      )}
     </div>
   );
 }
-
 
 export default Map;

@@ -1,4 +1,4 @@
-import "./HomePage.css";
+import "./AddToiletPage.css";
 import React, { Component } from 'react';
 import { useEffect, useState, useContext } from "react";
 import toiletsService from "../../services/toilets.service"
@@ -10,7 +10,7 @@ import Map from "../../components/googleMaps/Map";
 //import LocationSearchInput from "../../components/googleMaps/AutoCompleteBar";
 //import Map from "../../components/googleMaps/MarkerMap";
 
-function HomePage() {
+function AddToiletPage() {
   const [toilets, setToilets] = useState([])
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -71,12 +71,22 @@ function HomePage() {
 
   return (
     <>
-
       <div>
         <h1> All Toilets </h1>
-        {isLoaded && <Map canAddMarker={false}/>}
+        {isLoaded && <Map canAddMarker={true}/>}
         {/* <Map center={mapCenter} zoom={mapZoom} /> */}
       </div>
+
+      {isLoggedIn ? (
+  <div>
+    <h1> Add Toilets </h1>
+    {isLoaded && <AddToilet createToilet={createToilet}/>}
+  </div>
+) : (
+  <Link to={`/login`} className="btn btn-primary">
+    Log in to add a toilet
+  </Link>
+)}
 
 <div className="w-100 ">
 </div>
@@ -105,4 +115,4 @@ function HomePage() {
   );
 };
 
-export default HomePage;
+export default AddToiletPage;

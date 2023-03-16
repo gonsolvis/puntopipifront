@@ -32,6 +32,9 @@ function Navbar() {
               {isLoggedIn ? (
                 <>
                   <li className="nav-item">
+                    <Link to="/add-toilet" className="nav-link">Add Toilet</Link>
+                  </li>
+                  <li className="nav-item">
                     {/* <Link to="/profile" className="nav-link">My Profile </Link> */}
                     <Link to={`/profile/${user?._id}`} className="nav-link">My Profile </Link>
                  </li>
