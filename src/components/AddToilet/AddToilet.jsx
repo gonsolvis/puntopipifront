@@ -12,7 +12,7 @@ function AddToilet({ createToilet }) {
     const [address, setAddress] = useState("");
     const [rating, setRating] = useState("");
     const [imageUrl, setImageUrl] = useState("");
-    const [timestamp, setTimestamp] = useState("");
+    const [timestamps, setTimestamp] = useState("");
     const [clean, setClean] = useState("");
      const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
@@ -49,7 +49,7 @@ function AddToilet({ createToilet }) {
         if(imageUrl === "") {
             return;
         }
-        toiletsService.createOne({ title, description, rating, imageUrl, creator: user._id, timestamp, clean, address, latitude, longitude })
+        toiletsService.createOne({ title, description, rating, imageUrl, creator: user._id, timestamps, clean, address, latitude, longitude })
             .then(response => {
                 createToilet(response.data)
                 setTitle("");

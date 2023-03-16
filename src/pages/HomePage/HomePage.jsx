@@ -14,7 +14,7 @@ function HomePage() {
     toiletsService.getAll()
       .then((data) => {
        setToilets(data.data)
-       console.log(data) 
+       console.log("DATA", data) 
       })
       .catch((err) => {
 
@@ -66,15 +66,15 @@ function HomePage() {
 <Places /> 
 </div>
 
+
       <div className="d-flex flex-row flex-wrap justify-content-center">
         {toilets.map(toilet => {
           return (
-            <div className="card m-4 p-2" key={toilet._id}>
+            <div className="card m-4 p-2 sm-6" key={toilet._id}>
                 <div className="card-body">
-                <p className="card-text">{toilet._id}</p>
-                <p className="card-text">{toilet.title}</p>
-                <p className="card-text">{toilet.description}</p>
-                <p className="card-text">{getStars(toilet.rating)}</p>
+               <p className="card-text">Title: {toilet.title}</p>
+                <p className="card-text"> Description: {toilet.description}</p>
+                <p className="card-text"> Overall Rating: {getStars(toilet.rating)}</p>
                 <img  src={toilet.imageUrl}  width="100" height="100" alt="not working" className="card-text"/> 
                 <p className="card-text">
                   {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
