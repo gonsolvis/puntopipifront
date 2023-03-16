@@ -61,9 +61,7 @@ function HomePage() {
   </Link>
 )}
 
-<h1> All Toilets </h1>
 <div className="w-100 ">
-<Places /> 
 </div>
 
 
