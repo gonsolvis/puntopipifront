@@ -75,7 +75,7 @@ function HomePage() {
                 <p className="card-text">{toilet.title}</p>
                 <p className="card-text">{toilet.description}</p>
                 <p className="card-text">{getStars(toilet.rating)}</p>
-                <img  src={toilet.imageUrl} alt="not working" className="card-text"/> 
+                <img  src={toilet.imageUrl}  width="100" height="100" alt="not working" className="card-text"/> 
                 <p className="card-text">
                   {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
                   {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}

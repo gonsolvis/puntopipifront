@@ -68,7 +68,7 @@ function ProfilePage() {
       <div className="d-flex flex-row flex-wrap justify-content-center">
         <div className="card m-4 ">
           <div className="card-body">
-           {!isLoading && <img src={usuario?.imageUrl} alt="not working" className="card-text" />}
+           {!isLoading && <img src={usuario?.imageUrl} alt="not working"  height="100" width="100" className="card-text" />}
             <p className="card-text"> Full Name: {usuario.name}</p>
             <p className="card-text"> Email: {usuario.email}</p>
             <p className="card-text"> Am I an Admin?{usuario.isAdmin?<p> Yes</p>: <p> No</p> }</p>

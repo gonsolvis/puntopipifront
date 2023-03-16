@@ -101,8 +101,9 @@ console.log("hello state", isSameUser)
               {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
             </p>
             <Link to={`/`} className="btn btn-primary"> Go back to other Toilets</Link>
-            {(user.isAdmin || (user._id && user._id === isSameUser)) && (
-  <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>
+            
+            {(user?.isAdmin || (user?._id && user._id === isSameUser)) && (
+  <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button> 
 )}
 
 
@@ -120,8 +121,9 @@ console.log("hello state", isSameUser)
       {/* <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button>
 {showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />} */}
 
-      {user._id === isSameUser ? <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button> : null}
-{showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />}
+     {user?._id === isSameUser ? <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button> : null}
+{showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />} 
+
 
       <CommentTable toiletComments={toilet.comments} />
 

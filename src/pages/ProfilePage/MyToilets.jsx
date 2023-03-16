@@ -11,8 +11,8 @@ function MyToilets() {
   useEffect(() => {
     userService.getOneProfile(user._id)
       .then((data) => {
-        setToilets(data.data.result.toilets)
-        console.log(data.data.result.toilets)
+        setToilets(data.data.toilets)
+    
       })
       .catch((err) => { console.log(err) })
   }, [])
@@ -23,7 +23,7 @@ function MyToilets() {
 
       {toilets.length === 0 ? (
         <h1> You have no toilets  <p><i className="fa-solid fa-ghost fa-3x"></i></p></h1>
-      ) :  ( 
+      ) :  (
         toilets.map(toilet => (
           
           

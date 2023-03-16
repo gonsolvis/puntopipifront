@@ -59,7 +59,7 @@ function CommentTable({ toiletComments }) {
                   <div>
                     <br />
 
-                    <img src={comment.imageUrl} alt="Comment Image" className="user-img rounded-circle w-25 mr-2" />
+                    <img src={comment.imageUrl} alt="Comment Image" className="user-img  w-25 mr-2" />
 
                   </div>
 
@@ -71,7 +71,7 @@ function CommentTable({ toiletComments }) {
               </div>
               <div className="action d-flex justify-content-between mt-2 align-items-center">
                 <div className="reply px-4">
-                  {user.isAdmin && (
+                  {user?.isAdmin && (
                     <>
                       <button className="btn btn-danger mx-2" onClick={() => deleteHandler(comment._id)}>Delete</button>
                     </>
