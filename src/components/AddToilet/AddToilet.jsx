@@ -1,4 +1,4 @@
-// // import "./LoginPage.css";
+/// import "./LoginPage.css";
 import { useState, useContext } from "react";
 import toiletsService from "../../services/toilets.service";
 import uploadService from "../../services/upload.service"
@@ -9,6 +9,7 @@ function AddToilet({ createToilet }) {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [address, setAddress] = useState("");
     const [rating, setRating] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [timestamp, setTimestamp] = useState("");
@@ -109,3 +110,10 @@ function AddToilet({ createToilet }) {
 }
 
 export default AddToilet;
+
+
+
+
+
+
+
