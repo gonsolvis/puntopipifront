@@ -12,7 +12,14 @@ function AddToilet({ createToilet }) {
     const [address, setAddress] = useState("");
     const [rating, setRating] = useState("");
     const [imageUrl, setImageUrl] = useState("");
+    const [timestamps, setTimestamp] = useState("");
+    const [clean, setClean] = useState("");
+     const [latitude, setLatitude] = useState("");
+    const [longitude, setLongitude] = useState("");
     const { user } = useContext(AuthContext);
+
+
+
     const navigate = useNavigate();
     
 
@@ -42,12 +49,17 @@ function AddToilet({ createToilet }) {
         if(imageUrl === "") {
             return;
         }
-        toiletsService.createOne({ title, description, rating, imageUrl, creator: user._id })
+        toiletsService.createOne({ title, description, rating, imageUrl, creator: user._id, timestamps, clean, address, latitude, longitude })
             .then(response => {
                 createToilet(response.data)
                 setTitle("");
                 setDescription("");
                 setRating("");
+                setTimestamp("");
+                setClean("");
+                setAddress("");
+                setLatitude("");
+                setLongitude("");
                 setImageUrl("");
                 console.log("ENTRA")
             }).catch(err => console.log(err))
@@ -63,9 +75,25 @@ function AddToilet({ createToilet }) {
                 <label htmlFor="description" className="form-label">Description</label>
                 <input type="text" className="form-control" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
+             <div className="mb-3">
+                <label htmlFor="description" className="form-label">Address</label>
+                <input type="text" className="form-control" id="description" value={address} onChange={(e) => setAddress(e.target.value)} />
+            </div>
+              <div className="mb-3">
+                <label htmlFor="description" className="form-label">longitude</label>
+                <input type="text" className="form-control" id="description" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
+            </div>
+              <div className="mb-3">
+                <label htmlFor="description" className="form-label">latitude</label>
+                <input type="text" className="form-control" id="description" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
+            </div>
             <div className="mb-3">
                 <label htmlFor="description" className="form-label">rating</label>
                 <input type="text" className="form-control" id="rating" placeholder="1-5" value={rating} onChange={(e) => setRating(e.target.value)} />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="description" className="form-label">Cleanliness rating</label>
+                <input type="text" className="form-control" id="rating" placeholder="1-5" value={clean} onChange={(e) => setClean(e.target.value)} />
             </div>
             <div className="mb-3">
                 <label htmlFor="picture" className="form-label ">Upload an Image:</label>
