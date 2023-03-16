@@ -32,7 +32,7 @@ function App() {
           
           {/* <Route path="/map" element={<MapIndex />} /> */}
 
-          <Route path="/places" element={<Places />} />
+          {/* <Route path="/places" element={<Places />} /> */}
 
 
         <Route path="/profile/:idProfile" element={<ProfilePage />} />

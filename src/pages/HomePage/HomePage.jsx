@@ -7,6 +7,7 @@ import AddToilet from "../../components/AddToilet/AddToilet";
 import { AuthContext } from "../../context/auth.context";
 import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
 import Map from "../../components/googleMaps/Map";
+import MapContainer from "../../components/googleMaps/MarkerMap";
 
 
 function HomePage() {
@@ -70,7 +71,7 @@ function HomePage() {
 
       <div>
         <h1> All Toilets </h1>
-
+<Map/>
         {/* {isLoaded && <Map />} */}
       </div>
 
