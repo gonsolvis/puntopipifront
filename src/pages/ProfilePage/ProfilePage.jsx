@@ -1,3 +1,4 @@
+/*  eslint-disable*/
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth.context"
 import { Link } from "react-router-dom";
@@ -23,7 +24,7 @@ function ProfilePage() {
     authenticateUser();
     userService.getOneProfile(idProfile)
       .then(response => {
-        console.log("GET ONE USER ROUTE", response.data)
+       console.log("GET ONE USER ROUTE", response.data)
       setUsuario(response.data)
       setShowEditProfile(false)
       
