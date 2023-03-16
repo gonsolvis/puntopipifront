@@ -1,21 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Pacifico&display=swap');
 
 *{
     font-family: 'Fjalla One', sans-serif;
-    font-size: 1rem;
+   
    
 
 }
 
+nav {
+    font-size: 1.2rem;
+}
+
+#navTitle{
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    margin-right: 2%;
+}
+
+#buttonNav{
+    text-decoration: none;
+    border: none;
+    background-color: white;
+}
 
 h1 {
 
-font-size: 1rem;
+font-size: 2rem;
 font-style: italic;
 font-weight: bolder;
-
-
-
-
-
 }
