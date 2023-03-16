@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
 
 
 
@@ -48,7 +47,7 @@ function Map() {
               <p style="font-style: italic; font-size: 1.2rem">${toilet.title}</p>
               <p>${toilet.address}</p>
               <img style="width:350px; height:150px" src="${toilet.imageUrl}" alt="img-${toilet.title}">`,
-            position: {lat: toilet.latitude + .0012, lng: toilet.longitude}
+            position: {lat: toilet.latitude + .0050, lng: toilet.longitude}
           });
           const marker = new window.google.maps.Marker({
             position: latLng,
