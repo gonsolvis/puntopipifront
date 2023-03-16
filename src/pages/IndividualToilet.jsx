@@ -12,13 +12,13 @@ import EditIndividualToilet from "../pages/EditIndividualToilet"
 
 function IndividualToilet() {
   let { idToilet } = useParams();
-  console.log("PARAMS details", idToilet)
-
-  const { user } = useContext(AuthContext);
 
 
+  const { user, isLoggedIn } = useContext(AuthContext);
   const [toilet, setToilet] = useState({ comments: "patata" })
   const [isLoading, setIsLoading] = useState(true)
+  const [isSameUser, setisSameUser] = useState("")
+  const [showEditToilet, setShowEditToilet] = useState(false);
 
   const navigate = useNavigate();
 
@@ -27,6 +27,11 @@ function IndividualToilet() {
       .then((data) => {
         setToilet(data.data)
         setIsLoading(false)
+        setisSameUser(data.data.creator._id)
+        setTimeout(()=> {
+          
+          
+       }, )
       })
       .catch((err) => {
         console.log(err)
@@ -34,6 +39,22 @@ function IndividualToilet() {
 
   }, []);
 
+
+console.log("hello auth context", user)
+
+
+console.log("hello state", isSameUser)
+
+
+  // EDIT
+  function handleEditToiletClick() {
+    setShowEditToilet(!showEditToilet); }
+
+    const editToilet = (editOneToilet) => {
+          setToilet(editOneToilet)
+          setShowEditToilet(false);
+    }
+    
 
   //   // DELETE COMMENT
   const deleteHandler = (idToilet) => {
@@ -65,32 +86,57 @@ function IndividualToilet() {
     }
   }
 
-
   return (<>
     {isLoading ? (<p>Loading...</p>) : (<><h1 className="h1"> Toilet</h1>
 
       <div className="d-flex flex-row flex-wrap justify-content-center">
         <div className="card m-4">
           <div className="card-body">
-            <img src={toilet.imageUrl} alt="not working" className="card-text w-50" />
+            <img src={toilet ? toilet.imageUrl : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/800px-Cat_August_2010-4.jpg"} alt="not working" className="card-text w-50" />
             <p className="card-text">Title: {toilet.title}</p>
             <p className="card-text"> Description: {toilet.description}</p>
-            <p className="card-text"> Overall Rating: {getStars(toilet.rating)}</p>
+            <p className="card-text"> Address:  {toilet.address}</p>
+            <p className="card-text"> longitude:  {toilet.longitude}</p>
+            <p className="card-text"> latitude:  {toilet.latitude}</p>
+            <p className="card-text"> Rating: {getStars(toilet.rating)}</p>
+             <p className="card-text"> Cleanliness: {getStars(toilet.clean)}</p>
             <p className="card-text">
               {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
               {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
             </p>
             <Link to={`/`} className="btn btn-primary"> Go back to other Toilets</Link>
-            {/* {user.isAdmin && <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>}    */}
-            <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>
+            
+            {(user?.isAdmin || (user?._id && user._id === isSameUser)) && (
+  <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button> 
+)}
+
+
+
+
+
+
+  
+
 
           </div>
         </div>
       </div>
+      
+      {/* <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button>
+{showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />} */}
+
+     {user?._id === isSameUser ? <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button> : null}
+{showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />} 
+
 
       <CommentTable toiletComments={toilet.comments} />
 
-      <EditIndividualToilet idToilet={idToilet} /></>)}
+ </>)}
+
+
+      
+     
+      
   </>
 
 

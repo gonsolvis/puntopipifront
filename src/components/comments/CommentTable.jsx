@@ -1,16 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import commentService from "../../services/comment.service";
 import "./Comments.css";
 import avatarIcon from "./user_icon_149340 (3).png"
 import { Link, useNavigate } from "react-router-dom";
 import AddComment from "../comments/AddComment"
-
+import { AuthContext } from "../../context/auth.context";
 
 
 function CommentTable({ toiletComments }) {
+
+  const { user} = useContext(AuthContext);
   const [comments, setComments] = useState(toiletComments)
 
+
   const navigate = useNavigate();
+
 
   const createComment = (comment) => {
     setComments([...comments, comment])
@@ -29,8 +33,7 @@ function CommentTable({ toiletComments }) {
 
   return (
     <div className="d-flex flex-column align-items-center " >
-      <h2> Comments </h2>
-
+ 
       <AddComment createComment={createComment} />
 
       {comments.length === 0 ?
@@ -56,7 +59,7 @@ function CommentTable({ toiletComments }) {
                   <div>
                     <br />
 
-                    <img src={comment.imageUrl} alt="Comment Image" className="user-img rounded-circle w-25 mr-2" />
+                    <img src={comment.imageUrl} alt="Comment Image" className="user-img  w-25 mr-2" />
 
                   </div>
 
@@ -68,7 +71,7 @@ function CommentTable({ toiletComments }) {
               </div>
               <div className="action d-flex justify-content-between mt-2 align-items-center">
                 <div className="reply px-4">
-                  {!comment.creator.isAdmin && (
+                  {user?.isAdmin && (
                     <>
                       <button className="btn btn-danger mx-2" onClick={() => deleteHandler(comment._id)}>Delete</button>
                     </>

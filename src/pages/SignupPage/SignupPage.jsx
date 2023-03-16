@@ -48,10 +48,11 @@ function SignupPage() {
   };
 
   return (
+    <div className="d-flex justify-content-center  ">
     <div className="SignupPage">
       <h1>Sign Up</h1>
 
-      <form onSubmit={handleSignupSubmit}>
+      <form onSubmit={handleSignupSubmit} className="d-flex flex-column  justify-content-center  m-3">
         <label>Email:</label>
         <input type="email" name="email" value={email} onChange={handleEmail} />
 
@@ -83,6 +84,7 @@ function SignupPage() {
       <p>Already have account?</p>
       <Link to={"/login"}> Login</Link>
     </div>
+    </div> 
   );
 }
 

@@ -5,7 +5,7 @@ import userService from "../../services/user.service";
 import uploadService from "../../services/upload.service";
 
 
-function EditProfilePage() {
+function EditProfilePage({editProfile}) {
     const { user } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -33,13 +33,14 @@ function EditProfilePage() {
       .catch(err => console.log("Error while uploading the file: ", err));
   };
 
-  console.log(user)
+ 
 
-  //   // edit toilet
+  //   // edit profile
   const editHandler = (e) => {
-    e.preventDefault();
+      e.preventDefault();
     userService.updateOneProfile(user._id, {name, email, imageUrl })
       .then(response => {
+        editProfile(response.data)
         setEmail("");
         setName("");
         setImageUrl("");
@@ -61,11 +62,11 @@ function EditProfilePage() {
             <label htmlFor="description" className="form-label">Email</label>
             <input type="text" className="form-control" id="description" value={email} onChange={(e)=>setEmail(e.target.value)}/>
         </div>
-       {/* <div className="mb-3">
+       <div className="mb-3">
             <label htmlFor="description" className="form-label">Upload an Image:</label>
             <input type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl"/>
-        </div> */}
-        <button type="submit" className="btn btn-primary"> Submit</button>
+        </div>
+        <button className="btn btn-primary"> Submit</button>
     </form>
 
 
