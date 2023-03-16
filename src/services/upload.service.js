@@ -1,4 +1,4 @@
-// src/api/service.js
+/*  eslint-disable*/
 
 import axios from "axios";
 
@@ -19,4 +19,4 @@ const uploadImage = (file) => {
 };
 
 
-export default {uploadImage};
+export default {uploadImage}

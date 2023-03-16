@@ -1,18 +1,17 @@
-import { useEffect, useState, useContext } from "react";
+/*  eslint-disable*/
+import { useState, useContext } from "react";
 import commentService from "../../services/comment.service";
 import "./Comments.css";
 import avatarIcon from "./user_icon_149340 (3).png"
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AddComment from "../comments/AddComment"
 import { AuthContext } from "../../context/auth.context";
 
 
 function CommentTable({ toiletComments }) {
 
-  const { user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [comments, setComments] = useState(toiletComments)
-
-
   const navigate = useNavigate();
 
 
@@ -33,7 +32,7 @@ function CommentTable({ toiletComments }) {
 
   return (
     <div className="d-flex flex-column align-items-center " >
- 
+
       <AddComment createComment={createComment} />
 
       {comments.length === 0 ?

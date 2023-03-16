@@ -1,3 +1,4 @@
+/*  eslint-disable*/
 import "./HomePage.css";
 import React, { Component } from 'react';
 import { useEffect, useState, useContext } from "react";
@@ -5,7 +6,7 @@ import toiletsService from "../../services/toilets.service"
 import { Link } from "react-router-dom";
 import AddToilet from "../../components/AddToilet/AddToilet";
 import { AuthContext } from "../../context/auth.context";
-//import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
+// import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
 import Map from "../../components/googleMaps/Map";
 
 
@@ -53,7 +54,7 @@ function HomePage() {
 
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${"AIzaSyAkI1bljJ2mPXRx1mxgGs1Ow1Bqn_YOB1I"}`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
     script.async = true;
     script.defer = true;
     script.onerror = () => {

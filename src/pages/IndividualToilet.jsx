@@ -1,9 +1,9 @@
+/*  eslint-disable*/
 import { useEffect, useState, useContext } from "react";
 import toiletsService from "../services/toilets.service";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import CommentTable from "../components/comments/CommentTable";
-import AddComment from "../components/comments/AddComment"
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditIndividualToilet from "../pages/EditIndividualToilet"
@@ -14,7 +14,7 @@ function IndividualToilet() {
   let { idToilet } = useParams();
 
 
-  const { user, isLoggedIn } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [toilet, setToilet] = useState({ comments: "patata" })
   const [isLoading, setIsLoading] = useState(true)
   const [isSameUser, setisSameUser] = useState("")
@@ -38,12 +38,6 @@ function IndividualToilet() {
       })
 
   }, []);
-
-
-console.log("hello auth context", user)
-
-
-console.log("hello state", isSameUser)
 
 
   // EDIT
@@ -111,21 +105,10 @@ console.log("hello state", isSameUser)
   <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button> 
 )}
 
-
-
-
-
-
-  
-
-
-          </div>
+         </div>
         </div>
       </div>
       
-      {/* <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button>
-{showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />} */}
-
      {user?._id === isSameUser ? <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button> : null}
 {showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />} 
 

@@ -1,8 +1,9 @@
+/*  eslint-disable*/
 /// import "./LoginPage.css";
+
 import { useState, useContext } from "react";
 import toiletsService from "../../services/toilets.service";
 import uploadService from "../../services/upload.service"
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 
 function AddToilet({ createToilet }) {
@@ -19,9 +20,7 @@ function AddToilet({ createToilet }) {
     const { user } = useContext(AuthContext);
 
 
-
-    const navigate = useNavigate();
-    
+   
 
     // ******** this method handles the file upload ********
     const handleFileUpload = (e) => {
