@@ -14,8 +14,7 @@ function AddToilet({ createToilet }) {
     const [imageUrl, setImageUrl] = useState("");
     const [timestamp, setTimestamp] = useState("");
     const [clean, setClean] = useState("");
-    const [address, setAddress] = useState("");
-    const [latitude, setLatitude] = useState("");
+     const [latitude, setLatitude] = useState("");
     const [longitude, setLongitude] = useState("");
     const { user } = useContext(AuthContext);
 
@@ -78,15 +77,15 @@ function AddToilet({ createToilet }) {
             </div>
              <div className="mb-3">
                 <label htmlFor="description" className="form-label">Address</label>
-                <input type="text" className="form-control" id="description" value={address} onChange={(e) => setDescription(e.target.value)} />
+                <input type="text" className="form-control" id="description" value={address} onChange={(e) => setAddress(e.target.value)} />
             </div>
               <div className="mb-3">
                 <label htmlFor="description" className="form-label">longitude</label>
-                <input type="text" className="form-control" id="description" value={longitude} onChange={(e) => setDescription(e.target.value)} />
+                <input type="text" className="form-control" id="description" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
             </div>
               <div className="mb-3">
                 <label htmlFor="description" className="form-label">latitude</label>
-                <input type="text" className="form-control" id="description" value={latitude} onChange={(e) => setDescription(e.target.value)} />
+                <input type="text" className="form-control" id="description" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
             </div>
             <div className="mb-3">
                 <label htmlFor="description" className="form-label">rating</label>

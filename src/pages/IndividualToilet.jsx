@@ -95,7 +95,11 @@ console.log("hello state", isSameUser)
             <img src={toilet ? toilet.imageUrl : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/800px-Cat_August_2010-4.jpg"} alt="not working" className="card-text w-50" />
             <p className="card-text">Title: {toilet.title}</p>
             <p className="card-text"> Description: {toilet.description}</p>
-            <p className="card-text"> Overall Rating: {getStars(toilet.rating)}</p>
+            <p className="card-text"> Address:  {toilet.address}</p>
+            <p className="card-text"> longitude:  {toilet.longitude}</p>
+            <p className="card-text"> latitude:  {toilet.latitude}</p>
+            <p className="card-text"> Rating: {getStars(toilet.rating)}</p>
+             <p className="card-text"> Cleanliness: {getStars(toilet.clean)}</p>
             <p className="card-text">
               {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
               {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
