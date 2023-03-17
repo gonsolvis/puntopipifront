@@ -1,5 +1,5 @@
 /*  eslint-disable*/
-import "./HomePage.css";
+import "./AddToiletPage.css";
 import React, { Component } from 'react';
 import { useEffect, useState, useContext } from "react";
 import toiletsService from "../../services/toilets.service"
@@ -11,7 +11,7 @@ import Map from "../../components/googleMaps/Map";
 //import LocationSearchInput from "../../components/googleMaps/AutoCompleteBar";
 //import Map from "../../components/googleMaps/MarkerMap";
 
-function HomePage() {
+function AddToiletPage() {
   const [toilets, setToilets] = useState([])
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -72,12 +72,22 @@ function HomePage() {
 
   return (
     <>
-
       <div>
         <h1> All Toilets </h1>
-        {isLoaded && <Map canAddMarker={false}/>}
+        {isLoaded && <Map canAddMarker={true}/>}
         {/* <Map center={mapCenter} zoom={mapZoom} /> */}
       </div>
+
+      {isLoggedIn ? (
+  <div>
+    <h1> Add Toilets </h1>
+    {isLoaded && <AddToilet createToilet={createToilet}/>}
+  </div>
+) : (
+  <Link to={`/login`} className="btn btn-primary">
+    Log in to add a toilet
+  </Link>
+)}
 
 <div className="w-100 ">
 </div>
@@ -91,7 +101,7 @@ function HomePage() {
                 <p className="card-text">{toilet.title}</p>
                 <p className="card-text">{toilet.description}</p>
                 <p className="card-text">{getStars(toilet.rating)}</p>
-                <img src={toilet.imageUrl} alt="not working" className="card-text" />
+                <img src={toilet.imageUrl} alt="not working" className="w-25 h-50" />
                 <p className="card-text">
                   {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
                   {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
@@ -106,4 +116,4 @@ function HomePage() {
   );
 };
 
-export default HomePage;
+export default AddToiletPage;

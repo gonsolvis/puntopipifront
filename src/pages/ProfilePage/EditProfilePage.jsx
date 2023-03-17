@@ -46,6 +46,10 @@ function EditProfilePage({ editProfile }) {
 
   return (<div>
     <form onSubmit={editHandler} className="w-50 mx-auto mb-5">
+    <div className="mb-3">
+        <label htmlFor="description" className="form-label">Upload an Image:</label>
+        <input type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl" />
+      </div>
       <div className="mb-3">
         <label htmlFor="title" className="form-label">Name</label>
         <input type="text" className="form-control" id="title" aria-describedby="title" value={name} onChange={(e) => setName(e.target.value)} />
@@ -54,10 +58,7 @@ function EditProfilePage({ editProfile }) {
         <label htmlFor="description" className="form-label">Email</label>
         <input type="text" className="form-control" id="description" value={email} onChange={(e) => setEmail(e.target.value)} />
       </div>
-      <div className="mb-3">
-        <label htmlFor="description" className="form-label">Upload an Image:</label>
-        <input type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl" />
-      </div>
+     
       <button className="btn btn-primary"> Submit</button>
     </form>
 

@@ -23,6 +23,7 @@ function SignupPage() {
        authService
       .signup(requestBody)
       .then((response) => {
+        console.log("do i get here", response)
         navigate("/login");
       })
       .catch((error) => {
