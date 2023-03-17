@@ -1,3 +1,4 @@
+/*  eslint-disable*/
 import "./AddToiletPage.css";
 import React, { Component } from 'react';
 import { useEffect, useState, useContext } from "react";

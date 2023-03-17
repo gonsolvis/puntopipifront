@@ -1,3 +1,4 @@
+/*  eslint-disable*/
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';

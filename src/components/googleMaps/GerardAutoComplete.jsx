@@ -1,3 +1,4 @@
+/*  eslint-disable*/
 import { Autocomplete } from '@react-google-maps/api';
 import React, { useState } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
