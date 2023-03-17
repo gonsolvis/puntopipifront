@@ -5,10 +5,8 @@ import toiletsService from "../../services/toilets.service"
 import { Link } from "react-router-dom";
 import AddToilet from "../../components/AddToilet/AddToilet";
 import { AuthContext } from "../../context/auth.context";
-import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
 import Map from "../../components/googleMaps/Map";
-//import LocationSearchInput from "../../components/googleMaps/AutoCompleteBar";
-//import Map from "../../components/googleMaps/MarkerMap";
+
 
 function AddToiletPage() {
   const [toilets, setToilets] = useState([])
@@ -66,15 +64,12 @@ function AddToiletPage() {
     document.head.appendChild(script);
   }, []);
 
-  // const mapCenter = { lat: 41.3874, lng: 2.1686 };
-  // const mapZoom = 12;
 
   return (
     <>
       <div>
         <h1> All Toilets </h1>
         {isLoaded && <Map canAddMarker={true}/>}
-        {/* <Map center={mapCenter} zoom={mapZoom} /> */}
       </div>
 
       {isLoggedIn ? (

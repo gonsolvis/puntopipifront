@@ -7,8 +7,6 @@ export function LocationSearchInput({getAdressHandler, address, setAddress}) {
     setAddress(address);
   };
 
-
-
   const handleSelect = (address) => {
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
@@ -61,13 +59,5 @@ export function LocationSearchInput({getAdressHandler, address, setAddress}) {
     </PlacesAutocomplete>
   );
 }
-
-/*
-const getAdressHandler = (latLng, address) =>{
-  setCoordinates(latLng);
-    setAddress(address);
-}
-<Autocomplete getAdressHandler={getAdressHandler}
-*/
 
 export default LocationSearchInput;

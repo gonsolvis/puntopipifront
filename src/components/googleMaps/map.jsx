@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
-import AddToilet from '../AddToilet/AddToilet';
 
 
 
@@ -52,10 +50,6 @@ function Map({ canAddMarker }) {
       types: []
     };
 
-    // const autocomplete = new window.google.maps.places.Autocomplete(
-    //   input,
-    //   options
-    // );
 
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/toilets`)
@@ -120,39 +114,13 @@ function Map({ canAddMarker }) {
 
 
 
-    // autocomplete.addListener('place_changed', () => {
-    //   const newMarker = new window.google.maps.Marker({
-    //     position: undefined,
-    //     map: map,
-    //     animation: window.google.maps.Animation.DROP
-    //   });
-    //   newMarker.setVisible(false);
-    //   const place = autocomplete.getPlace();
-    //   if (!place.geometry || !place.geometry.location) {
-    //     window.alert(`No details available for input: '${place.name}'`);
-    //     return;
-    //   }
-    //   if (place.geometry.viewport) {
-    //     map.fitBounds(place.geometry.viewport);
-    //   } else {
-    //     map.setCenter(place.geometry.location);
-    //     map.setZoom(17);
-    //   }
-    //   newMarker.setPosition(place.geometry.location);
-    //   newMarker.setVisible(true);
-    // });
+    
   }, []);
 
   return (
     <div>
       <input id="pac-input" type="text" placeholder="Search Box" />
       <div id="map" style={{ height: '400px', width: '70%' }}></div>
-      {marker && (
-        <div>
-          <p>Latitude: {latitude}</p>
-          <p>Longitude: {longitude}</p>
-        </div>
-      )}
     </div>
   );
 }

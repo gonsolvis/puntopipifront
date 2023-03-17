@@ -28,10 +28,10 @@ function IndividualToilet() {
         setToilet(data.data)
         setIsLoading(false)
         setisSameUser(data.data.creator._id)
-        setTimeout(()=> {
-          
-          
-       }, )
+        setTimeout(() => {
+
+
+        },)
       })
       .catch((err) => {
         console.log(err)
@@ -40,21 +40,22 @@ function IndividualToilet() {
   }, []);
 
 
-console.log("hello auth context", user)
+  console.log("hello auth context", user)
 
 
-console.log("hello state", isSameUser)
+  console.log("hello state", isSameUser)
 
 
   // EDIT
   function handleEditToiletClick() {
-    setShowEditToilet(!showEditToilet); }
+    setShowEditToilet(!showEditToilet);
+  }
 
-    const editToilet = (editOneToilet) => {
-          setToilet(editOneToilet)
-          setShowEditToilet(false);
-    }
-    
+  const editToilet = (editOneToilet) => {
+    setToilet(editOneToilet)
+    setShowEditToilet(false);
+  }
+
 
   //   // DELETE COMMENT
   const deleteHandler = (idToilet) => {
@@ -100,48 +101,31 @@ console.log("hello state", isSameUser)
             <p className="card-text"> longitude:  {toilet.longitude}</p>
             <p className="card-text"> latitude:  {toilet.latitude}</p>
             <p className="card-text"> Rating: {getStars(toilet.rating)}</p>
-             <p className="card-text"> Cleanliness: {getStars(toilet.clean)}</p>
+            <p className="card-text"> Cleanliness: {getStars(toilet.clean)}</p>
             <p className="card-text">
               {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
               {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
             </p>
             <Link to={`/`} className="btn btn-primary"> Go back to other Toilets</Link>
-            
+
             {(user?.isAdmin || (user?._id && user._id === isSameUser)) && (
-  <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button> 
-)}
-
-
-
-
-
-
-  
-
-
+              <button className="btn btn-danger mx-2" onClick={() => deleteHandler(toilet._id)}>Delete</button>
+            )}
           </div>
         </div>
       </div>
-      
+
       {/* <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button>
 {showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />} */}
 
-     {user?._id === isSameUser ? <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button> : null}
-{showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />} 
+      {user?._id === isSameUser ? <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button> : null}
+      {showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />}
 
 
       <CommentTable toiletComments={toilet.comments} />
 
- </>)}
-
-
-      
-     
-      
+    </>)}
   </>
-
-
-
   );
 }
 

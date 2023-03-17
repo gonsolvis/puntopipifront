@@ -4,8 +4,7 @@ import toiletsService from "../../services/toilets.service";
 import uploadService from "../../services/upload.service"
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
-import Map from "../googleMaps/Map"
-import LocationSearchInput from "../googleMaps/GerardAutoComplete";
+import LocationSearchInput from "../googleMaps/AutoComplete";
 import Geocode from "react-geocode";
 
 function AddToilet({ createToilet }) {

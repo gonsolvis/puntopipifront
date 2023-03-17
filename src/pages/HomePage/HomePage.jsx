@@ -1,14 +1,10 @@
 import "./HomePage.css";
-import React, { Component } from 'react';
 import { useEffect, useState, useContext } from "react";
 import toiletsService from "../../services/toilets.service"
 import { Link } from "react-router-dom";
-import AddToilet from "../../components/AddToilet/AddToilet";
 import { AuthContext } from "../../context/auth.context";
-import { GoogleMap, useLoadScript, useJsApiLoader, Marker } from '@react-google-maps/api';
 import Map from "../../components/googleMaps/Map";
-//import LocationSearchInput from "../../components/googleMaps/AutoCompleteBar";
-//import Map from "../../components/googleMaps/MarkerMap";
+
 
 function HomePage() {
   const [toilets, setToilets] = useState([])
@@ -54,7 +50,7 @@ function HomePage() {
 
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${"AIzaSyAkI1bljJ2mPXRx1mxgGs1Ow1Bqn_YOB1I"}&libraries=places`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places`;
     script.async = true;
     script.defer = true;
     script.onerror = () => {
@@ -66,8 +62,7 @@ function HomePage() {
     document.head.appendChild(script);
   }, []);
 
-  // const mapCenter = { lat: 41.3874, lng: 2.1686 };
-  // const mapZoom = 12;
+
 
   return (
     <>
@@ -75,7 +70,6 @@ function HomePage() {
       <div>
         <h1> All Toilets </h1>
         {isLoaded && <Map canAddMarker={false}/>}
-        {/* <Map center={mapCenter} zoom={mapZoom} /> */}
       </div>
 
 <div className="w-100 ">
