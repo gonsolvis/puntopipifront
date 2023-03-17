@@ -15,6 +15,7 @@ function IndividualToilet() {
 
 
   const { user } = useContext(AuthContext);
+  console.log("admin?", user)
   const [toilet, setToilet] = useState({ comments: "patata" })
   const [isLoading, setIsLoading] = useState(true)
   const [isSameUser, setisSameUser] = useState("")

@@ -16,6 +16,7 @@ import Footer from "./components/Navbar/Footer";
 import AddToilet from "./components/AddToilet/AddToilet";
 import IndividualToilet from "./pages/IndividualToilet";
 import CommentTable from "./components/comments/CommentTable";
+import AddToiletPage from "./pages/AddToiletPage/AddToiletPage";
 
 function App() {
   return (
@@ -24,11 +25,18 @@ function App() {
 
       <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/add-toilet" element={<AddToiletPage />} />
       
         <Route path="/toilets/:idToilet" element={<IndividualToilet />} />
 
           <Route path="/comment" element={<CommentTable />} />
-      
+
+          
+          {/* <Route path="/map" element={<MapIndex />} /> */}
+
+          {/* <Route path="/places" element={<Places />} /> */}
+
+
         <Route path="/profile/:idProfile" element={<ProfilePage />} />
 
         <Route path="/signup" element={<IsAnon>
