@@ -1,4 +1,4 @@
-/*  eslint-disable*/
+/*  eslint-disable */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -35,7 +35,9 @@ function Map() {
     axios
       .get(`${process.env.REACT_APP_SERVER_URL}/toilets`)
       .then(response => {
+
         const newMarkers = response.data.map(toilet => {
+          console.log("testing", toilet)
           if(!toilet.latitude || !toilet.longitude){
             return;
           }
@@ -92,7 +94,7 @@ function Map() {
   return (
     <div>
       <input id="pac-input" type="text" placeholder="Search Box" />
-      <div id="map" style={{ height: '400px', width: '70%' }}></div>
+      <div id="map" style={{ height: '400px', width: '100%' }}></div>
     </div>
   );
 }

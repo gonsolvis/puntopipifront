@@ -50,6 +50,7 @@ function HomePage() {
   }
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [ShowAddButton, SetShowAddButton] = useState(false);
 
 
   useEffect(() => {
@@ -66,18 +67,35 @@ function HomePage() {
     document.head.appendChild(script);
   }, []);
 
+  function handleAddToiletClick() {
+    SetShowAddButton(!ShowAddButton);
+  }
+
+
   return (
     <>
 
-      <div>
-        <h1> All Toilets </h1>
-        {isLoaded && <Map />}
-      </div>
 
-      {isLoggedIn ? (
-  <div>
-    <h1> Add Toilets </h1>
-    <AddToilet createToilet={createToilet}/>
+
+
+
+<div>
+  <h1> All Toilets </h1>
+  <div className="d-flex justify-content-center">
+    <div style={{ width: "100%" }}>
+      {isLoaded && <Map />}
+    </div>
+  </div>
+</div>
+
+
+{isLoggedIn ? (
+  <div className="text-center">
+    <h1>Add Toilets</h1>
+    <div className="d-flex flex-column justify-content-center align-items-center mt-5">
+      <button className="btn btn-primary mb-4 p-3 " onClick={handleAddToiletClick}>Add Toilet</button>
+      {ShowAddButton && <AddToilet createToilet={createToilet} />}
+    </div>
   </div>
 ) : (
   <Link to={`/login`} className="btn btn-primary">
@@ -85,19 +103,18 @@ function HomePage() {
   </Link>
 )}
 
-<div className="w-100 ">
-</div>
+      <div className="w-100 ">
+      </div>
 
-      <div className="d-flex flex-row flex-wrap justify-content-center">
+      <div className="d-flex flex-row  justify-content-center">
         {toilets.map(toilet => {
           return (
             <div className="card m-4 p-2" key={toilet._id}>
               <div className="card-body">
-                <p className="card-text">{toilet._id}</p>
                 <p className="card-text">{toilet.title}</p>
                 <p className="card-text">{toilet.description}</p>
                 <p className="card-text">{getStars(toilet.rating)}</p>
-                <img src={toilet.imageUrl} alt="not working" className="card-text" />
+                {/* <img src={toilet.imageUrl} alt="not working" className="card-text" /> */}
                 <p className="card-text">
                   {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
                   {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}

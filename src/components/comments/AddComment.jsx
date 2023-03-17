@@ -49,7 +49,7 @@ function AddComment({ createComment, idToilet }) {
 
 
   return (
-    <div className="d-flex flex-column align-items-center" >
+    <div className="d-flex flex-column  justify-content-center " >
 
       {isLoggedIn ? (
         <div>
@@ -65,7 +65,10 @@ function AddComment({ createComment, idToilet }) {
               <input id="picture" type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl" />
             </div>
 
+            <div className=" d-flex justify-content-center">
             <button type="submit" className="btn btn-primary">Create Comment</button>
+          </div>
+
           </form>
         </div>
       ) : (

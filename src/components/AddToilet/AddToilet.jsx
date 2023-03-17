@@ -65,7 +65,7 @@ function AddToilet({ createToilet }) {
     }
 
     return (<div>
-        <form onSubmit={submitHandler} className="w-50 mx-auto mb-5">
+        <form onSubmit={submitHandler} className="w-50 mx-auto mb-5 mt-5 ">
             <div className="mb-3">
                 <label htmlFor="title" className="form-label">Title</label>
                 <input type="text" className="form-control" id="title" aria-describedby="title" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -78,14 +78,14 @@ function AddToilet({ createToilet }) {
                 <label htmlFor="description" className="form-label">Address</label>
                 <input type="text" className="form-control" id="description" value={address} onChange={(e) => setAddress(e.target.value)} />
             </div>
-              <div className="mb-3">
+              {/* <div className="mb-3">
                 <label htmlFor="description" className="form-label">longitude</label>
                 <input type="text" className="form-control" id="description" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
             </div>
               <div className="mb-3">
                 <label htmlFor="description" className="form-label">latitude</label>
                 <input type="text" className="form-control" id="description" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
-            </div>
+            </div> */}
             <div className="mb-3">
                 <label htmlFor="description" className="form-label">rating</label>
                 <input type="text" className="form-control" id="rating" placeholder="1-5" value={rating} onChange={(e) => setRating(e.target.value)} />
@@ -98,7 +98,7 @@ function AddToilet({ createToilet }) {
                 <label htmlFor="picture" className="form-label ">Upload an Image:</label>
                 <input id="picture" type="file" className="form-label" onChange={(e) => handleFileUpload(e)} name="imageUrl" />
             </div>
-            <button type="submit" className="btn btn-primary">Create project</button>
+            <button type="submit" className="btn btn-primary">Request Toilet</button>
         </form>
 
 
