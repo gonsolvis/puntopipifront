@@ -11,15 +11,20 @@ import EditIndividualToilet from "../pages/EditIndividualToilet"
 
 
 function IndividualToilet() {
+ 
+  const { user } = useContext(AuthContext);
+  console.log("USER?", user)
   let { idToilet } = useParams();
 
 
-  const { user } = useContext(AuthContext);
-  console.log("admin?", user)
+
+  console.log("USER?", user)
   const [toilet, setToilet] = useState({ comments: "patata" })
   const [isLoading, setIsLoading] = useState(true)
   const [isSameUser, setisSameUser] = useState("")
   const [showEditToilet, setShowEditToilet] = useState(false);
+ 
+    console.log("USER2?", user)
 
   const navigate = useNavigate();
 
@@ -41,7 +46,7 @@ console.log("who am i", data.data)
   }, []);
 
 
-  // EDIT
+    //   // EDIT COMMENT
   function handleEditToiletClick() {
     setShowEditToilet(!showEditToilet);
   }
@@ -117,10 +122,13 @@ console.log("who am i", data.data)
 
       <div className="text-center">
         <div className="d-inline-block">
-          {user?._id === isSameUser && <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button>}
+          {(user?.isAdmin || (user?._id && user._id === isSameUser)) && <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button>}
           {showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />}
         </div>
       </div>
+
+
+  
 
       <CommentTable toiletComments={toilet.comments} />
      
