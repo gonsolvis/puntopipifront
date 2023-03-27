@@ -64,7 +64,7 @@ function Map({ canAddMarker }) {
     // );
 
     axios
-      .get(`${process.env.REACT_APP_SERVER_URL}/toilets`)
+      .get("http://localhost:5005/toilets")
       .then(response => {
         const newMarkers = response.data.map(toilet => {
           if(!toilet.latitude || !toilet.longitude){
@@ -153,7 +153,7 @@ function Map({ canAddMarker }) {
 
   return (
     <div>
-      <input id="pac-input" type="text" placeholder="Search Box" />
+      {/* <input id="pac-input" type="text" placeholder="Search Box" /> */}
       <div id="map" style={{ height: '400px', width: '100%' }}></div>
       {marker && (
         <div>

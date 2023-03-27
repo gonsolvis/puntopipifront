@@ -55,7 +55,7 @@ function HomePage() {
 
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${"AIzaSyAkI1bljJ2mPXRx1mxgGs1Ow1Bqn_YOB1I"}&libraries=places`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${"AIzaSyAIoSkdJG2_FfLwGiKljfKM6sM0NVzviUo"}&libraries=places`;
     script.async = true;
     script.defer = true;
     script.onerror = () => {
