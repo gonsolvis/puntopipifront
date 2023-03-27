@@ -13,6 +13,7 @@ function EditIndividualToilet({ editToilet, idToilet }) {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [rating, setRating] = useState(0);
+  const [clean, setClean] = useState(0);
 
 
 
@@ -36,12 +37,13 @@ function EditIndividualToilet({ editToilet, idToilet }) {
       return;
     }
 
-    toiletsService.updateOne(idToilet, { title, description, rating, imageUrl, creator: user._id })
+    toiletsService.updateOne(idToilet, { title, description, rating, clean, imageUrl, creator: user._id })
       .then(response => {
         editToilet(response.data)
         setTitle("");
         setDescription("");
         setRating("");
+        setClean("");
         setImageUrl("");
 
       })
@@ -50,6 +52,10 @@ function EditIndividualToilet({ editToilet, idToilet }) {
 
   return (<div>
     <form onSubmit={editHandler} className="w-50 mx-auto mb-5">
+    <div className="mb-3">
+        <label htmlFor="description" className="form-label">Upload an Image:</label>
+        <input type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl" />
+      </div>
       <div className="mb-3">
         <label htmlFor="title" className="form-label">Title</label>
         <input type="text" className="form-control" id="title" aria-describedby="title" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -63,9 +69,10 @@ function EditIndividualToilet({ editToilet, idToilet }) {
         <input type="text" className="form-control" id="rating" value={rating} onChange={(e) => setRating(e.target.value)} />
       </div>
       <div className="mb-3">
-        <label htmlFor="description" className="form-label">Upload an Image:</label>
-        <input type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl" />
+        <label htmlFor="description" className="form-label">Cleanliness</label>
+        <input type="text" className="form-control" id="clean" value={clean} onChange={(e) => setClean(e.target.value)} />
       </div>
+     
       <button type="submit" className="btn btn-primary">Submit </button>
     </form>
 

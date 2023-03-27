@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import AddToilet from "../AddToilet/AddToilet";
 import { useContext, useState, } from "react";
 import { AuthContext } from "../../context/auth.context";
+import { BiLogOut } from 'react-icons/bi';
 
 function Navbar() {
   // Subscribe to the AuthContext to gain access to
@@ -40,7 +41,7 @@ function Navbar() {
                     <Link to={`/profile/${user?._id}`} className="nav-link">My Profile </Link>
                  </li>
                  <li className="nav-item">
-                    <Link to="/login" className="nav-link" onClick={logOutUser}>Logout</Link>
+                    <Link to="/login" className="nav-link" onClick={logOutUser}>Logout <BiLogOut /></Link>
                   </li>
                 </>
               ) : (
