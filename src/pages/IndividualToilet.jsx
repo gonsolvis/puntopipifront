@@ -16,9 +16,6 @@ function IndividualToilet() {
   console.log("USER?", user)
   let { idToilet } = useParams();
 
-
-
-  console.log("USER?", user)
   const [toilet, setToilet] = useState({ comments: "patata" })
   const [isLoading, setIsLoading] = useState(true)
   const [isSameUser, setisSameUser] = useState("")
@@ -126,9 +123,6 @@ console.log("who am i", data.data)
           {showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />}
         </div>
       </div>
-
-
-  
 
       <CommentTable toiletComments={toilet.comments} />
      
