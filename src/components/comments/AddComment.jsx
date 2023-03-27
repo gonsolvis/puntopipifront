@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/auth.context";
 import commentService from "../../services/comment.service";
 import "./Comments.css";
 import { Link } from "react-router-dom";
+import { BiMessageAltAdd } from 'react-icons/bi';
 import uploadService from "../../services/upload.service";
 
 function AddComment({ createComment, idToilet }) {
@@ -55,18 +56,19 @@ function AddComment({ createComment, idToilet }) {
         <div>
           <h1> Add Comment </h1>
           <form onSubmit={submitHandler} className=" mx-auto mb-5 ">
-            <div className="mb-3 d-flex flex-column align-items-center ">
-              <label htmlFor="title" className="form-label ">Description</label>
-              <input type="text" className="form-control w-75" placeholder="Write a comment" id="title" aria-describedby="title" value={content} onChange={(e) => setContent(e.target.value)} />
-            </div>
-
-            <div className="mb-3 d-flex flex-column align-items-center ">
+          <div className="mb-3 d-flex flex-column align-items-center ">
               <label htmlFor="picture" className="form-label">Upload an Image:</label>
               <input id="picture" type="file" onChange={(e) => handleFileUpload(e)} name="imageUrl" />
             </div>
+            <div className="mb-3 d-flex flex-column align-items-center ">
+              <label htmlFor="title" className="form-label "></label>
+              <input type="text" className="form-control w-75" placeholder="Write a comment" id="title" aria-describedby="title" value={content} onChange={(e) => setContent(e.target.value)} />
+            </div>
+
+           
 
             <div className=" d-flex justify-content-center">
-            <button type="submit" className="btn btn-primary">Create Comment</button>
+            <button type="submit" className="btn btn-primary">Create Comment <BiMessageAltAdd /></button>
           </div>
 
           </form>

@@ -7,6 +7,10 @@ import MyToilets from "./MyToilets";
 import EditProfilePage from "./EditProfilePage";
 import userService from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
+import { GrEdit } from 'react-icons/gr';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineHome } from 'react-icons/ai';
+
 
 function ProfilePage() {
 
@@ -33,21 +37,6 @@ function ProfilePage() {
       .catch(err => console.log("ERROR PUT", err))
   }, []);
 
-  // console.log("user", user)
-  // console.log("usuario", usuario)
-
-  // const formattedIat = new Date(user.iat * 1000).toLocaleTimeString([], {
-  //   hour: "2-digit",
-  //   minute: "2-digit",
-  // }) + " " +
-  // new Date(user.iat * 1000).toLocaleDateString("en-GB", {
-  //   day: "2-digit",
-  //   month: "2-digit",
-  //   year: "numeric",
-  // });
-
-  // edit
-
 
   // DELETE COMMENT
   const deleteHandler = (idProfile) => {
@@ -72,8 +61,7 @@ function ProfilePage() {
           <div className="d-flex flex-row flex-wrap justify-content-center">
             <div className="card m-4 ">
               <div className="card-body">
-                {/* {!isLoading && <img src={usuario?.imageUrl} alt="not working"  height="100" width="100" className="card-text" />} */}
-                <img src="https://hpsnf.com/wp-content/uploads/2021/04/avatar.jpg"
+              <img src="https://hpsnf.com/wp-content/uploads/2021/04/avatar.jpg"
                   onError={(e) => { e.target.onerror = null; e.target.src = "fallback-image-url"; e.target.alt = "Alternate text"; }}
                   alt="Image description"
                 />
@@ -81,12 +69,11 @@ function ProfilePage() {
                 <p className="card-text">  {usuario.email}</p>
                 <p className="card-text"> Am I an Admin?{usuario.isAdmin ? <p> Yes</p> : <p> No</p>}</p>
 
-                {/* <p className="card-text">{formattedIat}</p> */}
                 <Link to={`/`} className="btn btn-primary">
                   {" "}
-                  Go back to Home Page
+                 Home <AiOutlineHome />
                 </Link>
-                {user.isAdmin && <button className="btn btn-danger mx-2" onClick={() => deleteHandler(user._id)}>Delete</button>}
+                {user.isAdmin && <button className="btn btn-danger mx-2" onClick={() => deleteHandler(user._id)}>Delete <AiOutlineDelete /></button>}
 
 
               </div>
@@ -97,7 +84,7 @@ function ProfilePage() {
             <div className="text-center">
               <h1>Edit Profile</h1>
               <div className="d-inline-block">
-                <button className="btn btn-primary mb-4 p-3" onClick={handleEditProfileClick}>Edit Profile</button>
+                <button className="btn btn-primary mb-4 p-3" onClick={handleEditProfileClick}>Edit Profile <GrEdit /></button>
                 {showEditProfile && <EditProfilePage editProfile={editProfile} />}
               </div>
             </div>

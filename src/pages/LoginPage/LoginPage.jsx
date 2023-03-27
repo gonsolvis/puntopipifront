@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
 import authService from "../../services/auth.service";
+import { BiLogIn } from 'react-icons/bi';
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -67,7 +68,7 @@ function LoginPage() {
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+      <Link to={"/signup"}> Sign Up <BiLogIn /> </Link>
     </div>
     </div>  
   );

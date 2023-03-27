@@ -7,6 +7,12 @@ import CommentTable from "../components/comments/CommentTable";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import EditIndividualToilet from "../pages/EditIndividualToilet"
+import { GrEdit } from 'react-icons/gr';
+import { AiOutlineDelete } from 'react-icons/ai';
+import { BsInfoSquare } from 'react-icons/bs';
+
+
+
 
 
 
@@ -91,26 +97,29 @@ console.log("who am i", data.data)
         <div className="card m-4">
           <div className="card-body">
 
-            <div className=" d-flex justify-content-center">
+            <div className=" d-flex justify-content-center ">
               <img src={toilet ? toilet.imageUrl : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/800px-Cat_August_2010-4.jpg"} alt="not working" className="w-25" />
             </div >
-            <p className="card-text"> User: {toilet.creator.name}</p>
-            <p className="card-text h3">{toilet.title}</p>
-            <p className="card-text"> Description: {toilet.description}</p>
-            <p className="card-text"> Address:  {toilet.address}</p>
-            <p className="card-text"> Rating: {getStars(toilet.rating)}</p>
-            <p className="card-text"> Cleanliness: {getStars(toilet.clean)}</p>
-            <p className="card-text">
+            <p className="card-text h2 font-weight-bold "> Toilet Information <BsInfoSquare /></p>
+            <br/>
+            <p className="card-text h3"> {toilet.title}</p>
+            <p className="card-text"> "{toilet.description}"</p>
+            <p className="card-text text-secondary "> {toilet.address}</p>
+            <p className="card-text"><span className="text-primary">  Rating: </span>  {getStars(toilet.rating)}</p>
+            <p className="card-text"> <span className="text-primary">  Cleanliness: </span>  {getStars(toilet.clean)}</p>
+            <p className="card-text font-weight-normal"> <span className="text-primary"> Created by: </span> {toilet.creator.name}</p>
+            <p className="card-text">  <span className="text-primary">  Date Added: </span>
               {new Date(toilet.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}{' '}
               {new Date(toilet.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' })}
             </p>
+             
             <div className=" d-flex justify-content-center">
-              <Link to={`/`} className="btn btn-primary"> Go back to other Toilets</Link>
+              <Link to={`/`} className="btn btn-primary"> See more toilets</Link>
             </div >
 
             <div className=" d-flex justify-content-center">
               {(user?.isAdmin || (user?._id && user._id === isSameUser)) && (
-                <button className="btn btn-danger mx-2 mt-3" onClick={() => deleteHandler(toilet._id)}>Delete</button>
+                <button className="btn btn-danger mx-2 mt-3" onClick={() => deleteHandler(toilet._id)}>Delete <AiOutlineDelete /></button>
               )}
             </div >
           </div>
@@ -119,7 +128,7 @@ console.log("who am i", data.data)
 
       <div className="text-center">
         <div className="d-inline-block">
-          {(user?.isAdmin || (user?._id && user._id === isSameUser)) && <button className="btn btn-primary mb-5" onClick={handleEditToiletClick}>Edit Toilet</button>}
+          {(user?.isAdmin || (user?._id && user._id === isSameUser)) && <button className="btn btn-primary mb-5 p-2" onClick={handleEditToiletClick}>Edit Toilet <GrEdit /> </button>}
           {showEditToilet && <EditIndividualToilet editToilet={editToilet} idToilet={idToilet} />}
         </div>
       </div>

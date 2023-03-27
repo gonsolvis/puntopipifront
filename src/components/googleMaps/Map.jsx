@@ -157,8 +157,8 @@ function Map({ canAddMarker }) {
       <div id="map" style={{ height: '400px', width: '100%' }}></div>
       {marker && (
         <div>
-          <p>Latitude: {latitude}</p>
-          <p>Longitude: {longitude}</p>
+          {/* <p>Latitude: {latitude}</p>
+          <p>Longitude: {longitude}</p> */}
         </div>
       )}
     </div>
