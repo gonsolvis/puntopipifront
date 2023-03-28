@@ -24,10 +24,10 @@ class CommentService {
     return this.api.post('/comment/new', requestBody);
   }
 
-  // GET /api/examples
-  getAllComments = async (id) => {
-    return this.api.get(`/comment/${id}`);
-  }
+  // // GET /api/examples
+  // getAllComments = async (id) => {
+  //   return this.api.get(`/comment/${id}`);
+  // }
 
 
 //   // GET /api/examples/:id

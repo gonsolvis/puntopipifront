@@ -19,11 +19,11 @@ function MyToilets() {
   }, [])
 
   return (
-    <div className="d-flex flex-column align-items-center ">
+    <div className="d-flex flex-column align-items-center" >
 
 
       {toilets.length === 0 ? (
-        <h1> You have no toilets  <p><i className="fa-solid fa-ghost fa-3x"></i></p></h1>
+        <div className="d-flex flex-column align-items-center" ><h2> You have no toilets  </h2> <i className="fa-solid fa-ghost fa-5x"></i></div>
       ) : (
         toilets.map(toilet => (
 

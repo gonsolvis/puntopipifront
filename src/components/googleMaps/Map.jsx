@@ -75,11 +75,11 @@ function Map({ canAddMarker }) {
             lng: toilet.longitude
           };
           const infoWindow = new window.google.maps.InfoWindow({
-            content: `<p style="font-weight: bolder; font-size: 1.5rem">${toilet.title}</p>
-            <p style="font-style: italic; font-size: 1.2rem">${toilet.description}</p>
+            content: 
+            `
+            <img style="width:100px; height:100px" src="${toilet.imageUrl}" alt="img-${toilet.title}">
+            <p style="font-weight: bolder; font-size: 1.5rem">${toilet.title}</p>
             <p>${toilet.address}</p>
-            <img style="width:150px; height:150px" src="${toilet.imageUrl}" alt="img-${toilet.title}">
-            <br>
             <a href="/toilets/${toilet._id}">View details</a>`,
   position: {lat: toilet.latitude + .0050, lng: toilet.longitude}
           });

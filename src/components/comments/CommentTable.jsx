@@ -27,7 +27,9 @@ function CommentTable({ toiletComments }) {
       })
   }
 
-  console.log("user", user)
+  console.log("comments", comments)
+
+
   return (
     <div className="d-flex flex-column align-items-center" >
       <AddComment createComment={createComment} />
@@ -35,10 +37,10 @@ function CommentTable({ toiletComments }) {
       {comments.map(comment => (
         <div className="card p-3 w-75 m-2" key={comment._id}>
           <div className="user d-flex flex-row align-items-center">
-            <img src={avatarIcon} width="30" className="user-img rounded-circle mr-2" />
+            <img src={comment.creator.imageUrl} width="30" height="30" className="user-img rounded-circle mr-2" />
             <span className="user d-flex flex-row align-items-center">
               <small className="font-weight-bold text-primary m-3">
-                {user.name}
+                {comment.creator.name}
               </small>
               <div className="user d-flex flex-column justify-content-center align-items-center">
                 <small className="font-weight-bold">
@@ -50,7 +52,14 @@ function CommentTable({ toiletComments }) {
 
           <div className="user-img-container">
             <img src={comment.imageUrl} alt="Comment Image" className="user-img w-25 mr-2" />
+            <br/>
+            <small className="font-weight-bold text-secondary">
+              {new Date(comment.createdAt).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric' })}
+            </small>
           </div>
+
+                    
+
 
           <div className="action d-flex justify-content-between mt-2 align-items-center">
             <div className="reply px-4">
@@ -70,3 +79,16 @@ function CommentTable({ toiletComments }) {
 }
 
 export default CommentTable;
+
+
+// useEffect(() => {
+//   const getComments = async () => {
+//     try {
+//       const response = await commentService.getAllComments(toiletComments);
+//       setComments(response.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+//   getComments();
+// }, [toiletComments]);
