@@ -84,6 +84,10 @@ function AddToilet({ createToilet }) {
 
     return (<div>
         <form onSubmit={submitHandler} className="w-50 mx-auto mb-5">
+        <div className="mb-3">
+                <label htmlFor="picture" className="form-label ">Upload an Image:</label>
+                <br/> <span className="mx-1"><input id="picture" type="file" className="form-label" onChange={(e) => handleFileUpload(e)} name="imageUrl" /> </span>
+            </div>
             <div className="mb-3">
                 <label htmlFor="title" className="form-label">Title</label>
                 <input type="text" className="form-control" id="title" aria-describedby="title" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -104,10 +108,7 @@ function AddToilet({ createToilet }) {
                 <label htmlFor="description" className="form-label">Cleanliness rating</label>
                 <input type="text" className="form-control" id="rating" placeholder="1-5" value={clean} onChange={(e) => setClean(e.target.value)} />
             </div>
-            <div className="mb-3">
-                <label htmlFor="picture" className="form-label ">Upload an Image:</label>
-                <input id="picture" type="file" className="form-label" onChange={(e) => handleFileUpload(e)} name="imageUrl" />
-            </div>
+            
             <button type="submit" className="btn btn-primary">Create project</button>
         </form>
 

@@ -34,6 +34,7 @@ function IndividualToilet() {
   useEffect(() => {
     toiletsService.getOne(idToilet)
       .then((data) => {
+        console.log("TOILET", data.data)
         setToilet(data.data)
         setIsLoading(false)
         setisSameUser(data.data.creator._id)

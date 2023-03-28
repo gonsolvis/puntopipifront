@@ -55,16 +55,17 @@ function ProfilePage() {
 
   return (
     <>
-      <div className="d-flex flex-column flex-wrap align-content-center" >
+      <div className="d-flex flex-column flex-wrap align-items-center" >
         {!isLoading && isLoggedIn && usuario && user ? (usuario._id === user._id ? (<><h1 className="h1 text-center" > My Profile</h1>
 
-          <div className="d-flex flex-row flex-wrap justify-content-center">
+          <div className="">
             <div className="card m-4 ">
-              <div className="card-body">
-              <img src="https://hpsnf.com/wp-content/uploads/2021/04/avatar.jpg"
+              <div className="card-body d-flex flex-column flex-wrap align-items-center justify-content-center">
+              {/* <img src="https://hpsnf.com/wp-content/uploads/2021/04/avatar.jpg"
                   onError={(e) => { e.target.onerror = null; e.target.src = "fallback-image-url"; e.target.alt = "Alternate text"; }}
                   alt="Image description"
-                />
+                /> */}
+                <img src={usuario.imageUrl}  alt={"Image description"} className="w-25 rounded"/>
                 <p className="card-text"> User: {usuario.name}</p>
                 <p className="card-text">  {usuario.email}</p>
                 <p className="card-text"> Am I an Admin?{usuario.isAdmin ? <p> Yes</p> : <p> No</p>}</p>
@@ -80,14 +81,12 @@ function ProfilePage() {
             </div>
           </div>
 
-          <div >
-            <div className="text-center">
-              <h1>Edit Profile</h1>
-              <div className="d-inline-block">
+          <div className="d-flex flex-column align-items-center" >
+                     <div className="d-inline-block">
                 <button className="btn btn-primary mb-4 p-3" onClick={handleEditProfileClick}>Edit Profile <GrEdit /></button>
                 {showEditProfile && <EditProfilePage editProfile={editProfile} />}
               </div>
-            </div>
+            
             <MyToilets />
           </div></>) : (<p>Este no es tu perfil</p>)) : <p>Loading...</p>}
       </div>
