@@ -19,7 +19,7 @@ import { BsInfoSquare } from 'react-icons/bs';
 function IndividualToilet() {
  
   const { user } = useContext(AuthContext);
-  console.log("USER?", user)
+
   let { idToilet } = useParams();
 
   const [toilet, setToilet] = useState({ comments: "patata" })
@@ -27,20 +27,18 @@ function IndividualToilet() {
   const [isSameUser, setisSameUser] = useState("")
   const [showEditToilet, setShowEditToilet] = useState(false);
  
-    console.log("USER2?", user)
+
 
   const navigate = useNavigate();
 
   useEffect(() => {
     toiletsService.getOne(idToilet)
       .then((data) => {
-        console.log("TOILET", data.data)
         setToilet(data.data)
         setIsLoading(false)
         setisSameUser(data.data.creator._id)
         setTimeout(() => {
-console.log("who am i", data.data)
-
+          console.log("idToilet?", idToilet)
         },)
       })
       .catch((err) => {
@@ -134,7 +132,7 @@ console.log("who am i", data.data)
         </div>
       </div>
 
-      <CommentTable toiletComments={toilet.comments} />
+      <CommentTable toiletComments={toilet.comments} idToilet={idToilet} />
      
 
     </>)}

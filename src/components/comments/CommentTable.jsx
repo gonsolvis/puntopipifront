@@ -8,7 +8,7 @@ import AddComment from "../comments/AddComment"
 import { AuthContext } from "../../context/auth.context";
 
 
-function CommentTable({ toiletComments }) {
+function CommentTable({ toiletComments, idToilet }) {
 
   const { user } = useContext(AuthContext);
   const [comments, setComments] = useState(toiletComments)
@@ -17,6 +17,7 @@ function CommentTable({ toiletComments }) {
   const createComment = (comment) => {
     setComments([...comments, comment])
   }
+
 
   // DELETE COMMENT
   const deleteHandler = (commentId) => {
@@ -32,7 +33,7 @@ function CommentTable({ toiletComments }) {
 
   return (
     <div className="d-flex flex-column align-items-center" >
-      <AddComment createComment={createComment} />
+      <AddComment createComment={createComment}   idToilet={idToilet} />
 
       {comments.map(comment => (
         <div className="card p-3 w-75 m-2" key={comment._id}>

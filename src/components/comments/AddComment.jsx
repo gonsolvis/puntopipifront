@@ -36,7 +36,7 @@ function AddComment({ createComment, idToilet }) {
     if (imageUrl === "") {
       return;
     }
-    commentService.createOneComment({ content, imageUrl, creator: user._id, toilet })
+    commentService.createOneComment({ content, imageUrl, creator: user._id, toilet: idToilet })
       .then(response => {
         console.log("response before create comment", response)
         createComment(response.data)
