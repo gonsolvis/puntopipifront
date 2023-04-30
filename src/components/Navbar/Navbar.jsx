@@ -17,15 +17,11 @@ function Navbar() {
   return (
     <>
 
-      <nav className="navbar navbar-expand-lg">
-        <div className="container-fluid">
-          <Link to="/" className="m-2 navbar-brand text-center"> <h1 className="px-4" id="navTitle">  .PuntoPipí</h1></Link>
-          <button className="navbar-toggler mr-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+      <nav className="navbar navbar-expand-lg ">
+        <div className="container-fluid " id="navbrrr">
+          
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ">
+            <ul className="navbar-nav  ">
 
               <li className="nav-item">
                 <Link to="/" className="nav-link">All Toilets </Link>
@@ -62,6 +58,11 @@ function Navbar() {
 
             </ul>
           </div>
+          <Link to="/" className="m-2 navbar-brand text-center"> <h1 className="px-4" id="navTitle">  .PuntoPipí</h1></Link>
+          <button className="navbar-toggler mr-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
         </div>
       </nav>
 

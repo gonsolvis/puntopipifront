@@ -73,16 +73,19 @@ function HomePage() {
   return (
     <>
 
-      <div>
-        <h1> All Toilets </h1>
+      <div className="websiteBody">
+        <h1 className="homepage--h1"> All Toilets </h1>
         {isLoaded && <Map canAddMarker={false}/>}
-        {/* <Map center={mapCenter} zoom={mapZoom} /> */}
+        <p className="homepage--h1"> Want to add a toilet? <Link to="/login" className="">Log In </Link> to add more</p>
+       
+       
+
+
       </div>
 
-<div className="w-100 ">
-</div>
 
-      <div className="d-flex flex-row flex-wrap justify-content-center">
+
+      <div className="">
         {toilets.map(toilet => {
           return (
             <div className="card m-4 p-2" key={toilet._id}>

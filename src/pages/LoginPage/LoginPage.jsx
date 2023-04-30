@@ -47,13 +47,16 @@ function LoginPage() {
   };
 
   return (
-    <div className="d-flex justify-content-center  ">
-    <div className="LoginPage">
+    <div className=" LoginPage  ">
       <h1>Login</h1>
 
-      <form onSubmit={handleLoginSubmit} className="d-flex flex-column  justify-content-center  m-3">
+      <form onSubmit={handleLoginSubmit} className="login--form  ">
         <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+        <input type="email"
+         name="email"
+          value={email} 
+          onChange={handleEmail}
+          className="login--input" />
 
         <label>Password:</label>
         <input
@@ -61,16 +64,17 @@ function LoginPage() {
           name="password"
           value={password}
           onChange={handlePassword}
+          className="login--input"
         />
 
-        <button type="submit" className="m-4">Login</button>
+        <button type="submit" className="login--loginButton" >Login</button>
       </form>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
       <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up <BiLogIn /> </Link>
+      <Link to={"/signup"} className="login--signupLink"> Sign Up <BiLogIn /> </Link>
     </div>
-    </div>  
+    
   );
 }
 

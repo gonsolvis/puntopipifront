@@ -1,4 +1,38 @@
-#map {
-    height: 100%;
+/* main colours
+  PURPLE #8739F9
+  AQUA #37B9F1
+  GREY #F2F5F5
+text
+  DARKER #565360 / #252525
+  LABEL # 908E9B
+  GREY # E1DFE9
+
+SMALL LENGTHS
+0.25REM
+0.5REM
+0.75REM 
+MEDUIM LENGTHS
+1REM
+1.25REM
+0.50REM 
+LARGE LENGTHS
+2REM
+3REM
+4REM */
+
+.websiteBody {
+    height: 100vh;
     width: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+ 
+   
+}
+   
+
+.homepage--h1 {
+ padding-left: 2%;
+ color: #565360 ;
+ /* color: #252525 ; */
 }
